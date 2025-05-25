@@ -1,0 +1,390 @@
+
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --success-color: #2ecc71;
+            --light-bg: #f8f9fa;
+            --warning-color: #f39c12;
+        }
+
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: #ffffff;
+            margin-right: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: var(--primary-color);
+        }
+
+        .stock-arrivals-card {
+            margin-top: 30px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .stock-arrivals-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stock-arrivals-title {
+            font-weight: 700;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stock-arrivals-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--warning-color);
+            border-radius: 2px;
+        }
+
+        .back-btn {
+            background-color: var(--light-bg);
+            color: var(--secondary-color) !important;
+            font-weight: 600;
+            padding: 8px 20px !important;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+            border: 1px solid #dee2e6;
+        }
+
+        .back-btn:hover {
+            background-color: #e2e6ea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logout-btn {
+            background-color: var(--accent-color);
+            color: white !important;
+            font-weight: 600;
+            padding: 8px 20px !important;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin-left: auto;
+            border: none;
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+        }
+
+        .logo-text {
+            font-weight: bold;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            margin-right: 30px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .logo-text span:first-child {
+            color: #e74c3c;
+        }
+
+        .logo-text span:nth-child(2) {
+            color: white;
+        }
+
+        .logo-text span:last-child {
+            color: var(--success-color);
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .select2-container--default .select2-selection--single {
+            border-radius: 8px;
+            padding: 10px 15px;
+            border: 1px solid #ced4da;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus,
+        .select2-container--default.select2-container--focus .select2-selection--single {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+            border-color: var(--warning-color);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-warning:hover {
+            background-color: #e67e22;
+            border-color: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            border-radius: 8px;
+        }
+
+        .select2-container--default .select2-selection--single {
+            height: auto;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 100%;
+        }
+
+        .supplier-info,
+        .product-info {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .arrival-meta {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .meta-label {
+            font-weight: 600;
+            color: var(--secondary-color);
+            min-width: 120px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .logo-text {
+                margin-bottom: 10px;
+                width: 100%;
+            }
+
+            .back-btn,
+            .logout-btn {
+                margin: 5px 0;
+            }
+
+            .meta-item {
+                flex-direction: column;
+            }
+
+            .meta-label {
+                margin-bottom: 5px;
+            }
+        }
+
+        /* Updated Input Styles */
+        .form-control,
+        .select2-selection {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+            font-size: 0.95rem;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+            height: auto;
+        }
+
+        .form-control:focus,
+        .select2-selection--single:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+            background-color: #fff;
+            outline: none;
+        }
+
+        /* Input Group Styles */
+        .input-group .form-control {
+            border-right: none;
+        }
+
+        .input-group-text {
+            background-color: #f1f1f1;
+            border: 1px solid #e0e0e0;
+            border-left: none;
+            color: #555;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .input-group:focus-within .input-group-text {
+            border-color: #3498db;
+            background-color: #e3f2fd;
+            color: #3498db;
+        }
+
+        /* Select2 Custom Styles */
+        .select2-container--default .select2-selection--single {
+            border: 1px solid #e0e0e0;
+            height: auto;
+            min-height: 46px;
+            display: flex;
+            align-items: center;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 44px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #333;
+            line-height: 1.5;
+            padding-left: 12px;
+        }
+
+        /* Table Input Styles */
+        .order-items-table .form-control {
+            padding: 10px 12px;
+            background-color: #fff;
+        }
+
+        .order-items-table .form-control:focus {
+            background-color: #fff;
+        }
+
+        /* Quantity Input Specific Style */
+        .item-quantity {
+            text-align: center;
+            max-width: 80px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Price Input Specific Style */
+        .item-price {
+            text-align: right;
+            max-width: 120px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        /* Total Field Style */
+        .item-total {
+            text-align: right;
+            font-weight: 600;
+            color: #2c3e50;
+            background-color: #f1f8fe;
+            border-color: #d6e9f8;
+        }
+
+        /* Labels */
+        .form-label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Invalid State */
+        .form-control.is-invalid,
+        .was-validated .form-control:invalid {
+            border-color: #dc3545;
+            background-image: none;
+        }
+
+        .form-control.is-invalid:focus,
+        .was-validated .form-control:invalid:focus {
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15);
+        }
+
+        /* Valid State */
+        .form-control.is-valid,
+        .was-validated .form-control:valid {
+            border-color: #28a745;
+            background-image: none;
+        }
+
+        .form-control.is-valid:focus,
+        .was-validated .form-control:valid:focus {
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
+        }

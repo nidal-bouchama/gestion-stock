@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Stock Arrivals Management</title>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" media="print"
+        onload="this.media='all'">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"
+        media="print" onload="this.media='all'">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.css" rel="stylesheet">
+    <!-- Flatpickr CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <link rel="icon" type="image" href="Images/logo.svg">
+    <link rel="stylesheet" href="{{asset('css/Stock_arrivals/Index.css')}}">
+</head>
+
+<body>
+    <!-- Loading spinner -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Your existing navbar -->
+    <nav class="navbar">
+        <div class="logo-text">
+            <span>Gestion</span>
+            <span>Stock</span>
+            <span>Web</span>
+        </div>
+        <a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i> Home</a>
+        <a href="{{ route('products.index') }}"><i class="fas fa-box me-1"></i> Products</a>
+        <a href="{{ route('suppliers.index') }}"><i class="fas fa-truck me-1"></i> Suppliers</a>
+        <a href="{{ route('customers.index') }}"><i class="fas fa-users me-1"></i> Customers</a>
+        <a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart me-1"></i> Orders</a>
+        <a href="{{ route('stock-arrivals.index') }}" class="active"><i class="fas fa-dolly me-1"></i> Stock
+            Arrivals</a>
+        <a href="#" class="logout-btn"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                class="fas fa-sign-out-alt me-1"></i> Logout</a>
+    </nav>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card stock-arrivals-card">
+                    <div class="card-header">
+                        <h2 class="mb-0"><i class="fas fa-dolly me-2"></i> Stock Arrivals Management</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <a href="{{ route('stock-arrivals.create') }}" class="btn btn-primary">
+                                <i class="fas fa-plus-circle me-2"></i> New Arrival
+                            </a>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table id="stockArrivalsTable" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Supplier</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Arrival Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($stockArrivals as $arrival)
+                                        <tr>
+                                            <td>{{ $arrival->supplier->name ?? 'N/A' }}</td>
+                                            <td>{{ $arrival->product->name ?? 'N/A' }}</td>
+                                            <td>{{ $arrival->quantity }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($arrival->arrival_date)->format('M d, Y') }}
+                                            </td>
+                                            <td class="action-buttons">
+                                                <a href="{{ route('stock-arrivals.edit', $arrival->id) }}"
+                                                    class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
+                                                    title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form action="{{ route('stock-arrivals.destroy', $arrival->id) }}"
+                                                    method="POST" class="d-inline delete-form">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                        data-bs-toggle="tooltip" title="Delete">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+                                                <a href="#" class="btn btn-sm btn-info view-details"
+                                                    data-bs-toggle="tooltip" title="View Details"
+                                                    data-id="{{ $arrival->id }}">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quick Actions Button -->
+    <div class="quick-actions-btn" id="quickActionsBtn">
+        <i class="fas fa-bolt"></i>
+    </div>
+
+    <!-- Quick Actions Menu -->
+    <div class="dropdown-menu dropdown-menu-end p-2" id="quickActionsMenu"
+        style="position: fixed; bottom: 100px; right: 30px; display: none; min-width: 200px;">
+        <button class="dropdown-item" type="button" id="exportExcelBtn">
+            <i class="fas fa-file-excel text-success me-2"></i>Export to Excel
+        </button>
+        <button class="dropdown-item" type="button" id="printTableBtn">
+            <i class="fas fa-print text-primary me-2"></i>Print Table
+        </button>
+        <button class="dropdown-item" type="button" id="refreshDataBtn">
+            <i class="fas fa-sync-alt text-info me-2"></i>Refresh Data
+        </button>
+    </div>
+
+    <footer>
+        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved.
+    </footer>
+
+    <!-- JavaScript Libraries - Load with defer -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
+    <!-- Inline JavaScript with performance optimizations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show loading spinner
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            loadingSpinner.style.display = 'flex';
+
+            // Initialize when window loads
+            window.addEventListener('load', function() {
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+
+                // Initialize DataTable
+                const table = $('#stockArrivalsTable').DataTable({
+                    responsive: true,
+                    language: {
+                        search: "_INPUT_",
+                        searchPlaceholder: "Search...",
+                    },
+                    dom: '<"top"f>rt<"bottom"lip><"clear">',
+                    initComplete: function() {
+                        $('.dataTables_filter input').addClass('form-control');
+                    }
+                });
+
+                // Search functionality
+                document.getElementById('searchInput').addEventListener('keyup', function() {
+                    table.search(this.value).draw();
+                });
+
+                // Delete confirmation with SweetAlert
+                document.querySelectorAll('.delete-form').forEach(form => {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                loadingSpinner.style.display = 'flex';
+                                form.submit();
+                            }
+                        });
+                    });
+                });
+
+                // Initialize tooltips
+                const tooltipTriggerList = [].slice.call(document.querySelectorAll(
+                    '[data-bs-toggle="tooltip"]'));
+                tooltipTriggerList.map(function(tooltipTriggerEl) {
+                    return new bootstrap.Tooltip(tooltipTriggerEl);
+                });
+
+                // View details handler
+                document.querySelectorAll('.view-details').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const arrivalId = this.getAttribute('data-id');
+                        // Implement details view functionality
+                        loadingSpinner.style.display = 'flex';
+
+                        // Simulate API call
+                        setTimeout(() => {
+                            loadingSpinner.style.display = 'none';
+                            Swal.fire({
+                                title: 'Arrival Details #' + arrivalId,
+                                html: `<div class="text-start">
+                                    <p><strong>Supplier:</strong> ${$('#stockArrivalsTable tr[data-id="' + arrivalId + '"] td:nth-child(2)').text()}</p>
+                                    <p><strong>Product:</strong> ${$('#stockArrivalsTable tr[data-id="' + arrivalId + '"] td:nth-child(3)').text()}</p>
+                                    <p><strong>Quantity:</strong> ${$('#stockArrivalsTable tr[data-id="' + arrivalId + '"] td:nth-child(4)').text()}</p>
+                                    <p><strong>Arrival Date:</strong> ${$('#stockArrivalsTable tr[data-id="' + arrivalId + '"] td:nth-child(5)').text()}</p>
+                                </div>`,
+                                confirmButtonText: 'Close'
+                            });
+                        }, 500);
+                    });
+                });
+
+                // Notification for successful actions
+                @if (session('success'))
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: '{{ session('success') }}',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                @endif
+
+                @if (session('error'))
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: '{{ session('error') }}',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                @endif
+            });
+
+            // Service worker registration for PWA capabilities
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/service-worker.js').then(
+                        function(registration) {
+                            console.log('ServiceWorker registration successful');
+                        },
+                        function(err) {
+                            console.log('ServiceWorker registration failed: ', err);
+                        }
+                    );
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
