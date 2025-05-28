@@ -54,16 +54,18 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if (isset($products) && count($products) > 0)
-                            <div class="row" id="productsContainer">
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+                        <div class="row" id="productsContainer">
+                            @if ($products->count() > 0)
                                 @foreach ($products as $product)
                                     <div class="col-md-6 col-lg-4 mb-3 product-item-wrapper">
                                         <div class="product-item">
                                             <img src="{{ $product->image_url }}" alt="{{ $product->name }}"
-                                                class="mb-2" style="max-width: 200px; max-height: 200px;">
+                                                class="mb-2" style="max-width: 200px; max-height: 200px;"
+                                                onerror="this.onerror=null;this.src='{{ asset('Images/default-product.png') }}';">
                                             <h5 class="product-name">{{ $product->name }}</h5>
-                                            <p class="text-muted small">{{ Str::limit($product->description, 60) }}
-                                            </p>
+                                            <p class="text-muted small">{{ Str::limit($product->description, 60) }}</p>
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <span class="badge bg-primary rounded-pill">{{ $product->price }}
                                                     DH</span>
@@ -88,12 +90,12 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
-                        @else
-                            <div class="alert alert-info">
-                                <i class="fas fa-info-circle me-2"></i> No products found.
-                            </div>
-                        @endif
+                            @else
+                                <div class="alert alert-info">
+                                    <i class="fas fa-info-circle me-2"></i> No products found.
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -173,6 +175,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Delete confirmation functionality
+            let productIdToDelete = null;
+            const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            
+            // Set up event listeners for all delete buttons
+            const deleteButtons = document.querySelectorAll('.delete-confirm');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    productIdToDelete = this.getAttribute('data-id');
+                    deleteModal.show();
+                });
+            });
+            
+            // Handle the confirmation button click
+            const confirmDeleteButton = document.getElementById('confirmDelete');
+            confirmDeleteButton.addEventListener('click', function() {
+                if (productIdToDelete) {
+                    // Find the form for this product and submit it
+                    const form = document.querySelector(`button[data-id="${productIdToDelete}"]`).closest('form');
+                    form.submit();
+                }
+                deleteModal.hide();
+            });
+
             // Button hover effects with enhanced animations
             const buttons = document.querySelectorAll('.btn');
             buttons.forEach(button => {
@@ -250,6 +276,7 @@
             }
         });
     </script>
+
 </body>
 
 </html>

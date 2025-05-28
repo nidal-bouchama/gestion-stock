@@ -103,7 +103,7 @@
                 <!-- Product Image Column -->
                 <div class="col-md-5">
                     <div class="product-image-container">
-                        <img src="{{ asset('uploads/' . $product->image) }}" alt="Product Image" class="product-image img-fluid" id="product-image-preview">
+                        <img src="{{ $product->image_url ?? asset('Images/default-product.png') }}" alt="Product Image" class="product-image img-fluid" id="product-image-preview" onerror="this.onerror=null;this.src='{{ asset('Images/default-product.png') }}';">
                         <div class="mt-3">
                             <input type="file" id="image-upload" style="display: none;" accept="image/*" name="image">
                             <button type="button" class="image-upload-btn" onclick="document.getElementById('image-upload').click()">

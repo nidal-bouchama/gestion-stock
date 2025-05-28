@@ -1,0 +1,123 @@
+[
+  {
+    "id": "12",
+    "category_id": null,
+    "name": "Oppo",
+    "description": "OPPO Reno 8 Pro 5G, Dual 256GB, 12GB RAM, Factory Unlocked GSM - Green",
+    "price": "7000.00",
+    "quantity": 7,
+    "created_at": "2025-05-09 23:36:23",
+    "updated_at": "2025-05-09 23:36:23",
+    "image": null
+  },
+  {
+    "id": "13",
+    "category_id": null,
+    "name": "Réfrigérateur LG 350L",
+    "description": "Réfrigérateur classe énergétique A++.",
+    "price": "6800.00",
+    "quantity": 10,
+    "created_at": "2025-05-10 21:57:42",
+    "updated_at": "2025-05-10 22:59:55",
+    "image": null
+  },
+  {
+    "id": "14",
+    "category_id": null,
+    "name": "Lave-linge Bosch 8kg",
+    "description": "Machine à laver Bosch à chargement frontal",
+    "price": "4500.00",
+    "quantity": 13,
+    "created_at": "2025-05-10 21:58:52",
+    "updated_at": "2025-05-10 23:00:25",
+    "image": null
+  },
+  {
+    "id": "15",
+    "category_id": null,
+    "name": "Lave-linge Samsung 9kg",
+    "description": "Machine intelligente Samsung.",
+    "price": "6000.00",
+    "quantity": 10,
+    "created_at": "2025-05-10 22:01:00",
+    "updated_at": "2025-05-10 22:01:00",
+    "image": null
+  },
+  {
+    "id": "16",
+    "category_id": null,
+    "name": "Micro-ondes Whirlpool",
+    "description": "Four micro-ondes 25L.",
+    "price": "700.00",
+    "quantity": 14,
+    "created_at": "2025-05-10 22:57:26",
+    "updated_at": "2025-05-10 22:57:26",
+    "image": null
+  },
+  {
+    "id": "17",
+    "category_id": null,
+    "name": "Lave-vaisselle Siemens",
+    "description": "Lave-vaisselle avec 12 couverts.",
+    "price": "9000.00",
+    "quantity": 10,
+    "created_at": "2025-05-10 22:59:01",
+    "updated_at": "2025-05-10 22:59:25",
+    "image": null
+  },
+  {
+    "id": "18",
+    "category_id": null,
+    "name": "Smart TV LG",
+    "description": "LG Smart TV 55\" 55UR781C, 3840x2160, 300cd/m2, 3xHDMI/2xUSB/WiFi/Bluetooth/LAN/CI/RF/SPDIF",
+    "price": "13940.00",
+    "quantity": 5,
+    "created_at": "2025-05-25 00:49:58",
+    "updated_at": "2025-05-25 00:49:58",
+    "image": null
+  },
+  {
+    "id": "11",
+    "category_id": null,
+    "name": "Iphone 14",
+    "description": "128Go, 25 pixel",
+    "price": "5000.00",
+    "quantity": 5,
+    "created_at": "2025-05-09 23:27:36",
+    "updated_at": "2025-05-25 14:50:19",
+    "image": null
+  },
+  {
+    "id": "19",
+    "category_id": "8",
+    "name": "samsung s24",
+    "description": "SAMSUNG Galaxy S24 Ultra 12+1TB TITANIUM BLACK",
+    "price": "6500.00",
+    "quantity": 6,
+    "created_at": "2025-05-27 09:05:10",
+    "updated_at": "2025-05-27 09:05:10",
+    "image": null
+  },
+  {
+    "id": "20",
+    "category_id": "9",
+    "name": "Tablette Samsung Galaxy",
+    "description": "Tablette Samsung Galaxy Tab SIO Ultra 5G 12GB\r\n51260 - SM-X926BZAEMWD - Maxfor",
+    "price": "16200.00",
+    "quantity": 5,
+    "created_at": "2025-05-27 23:44:15",
+    "updated_at": "2025-05-27 23:44:15",
+    "image": "products/JAFrSQ1z5n5351ls7zNddLNeEfo5Y9XuBpLFnFwv.jpg"
+  },
+  {
+    "id": "21",
+    "category_id": "9",
+    "name": "Tablette Samsung Galaxy",
+    "description": "Tablette Samsung Galaxy Tab SIO Ultra 5G 12GB\r\n51260 - SM-X926BZAEMWD - Maxfor",
+    "price": "16200.00",
+    "quantity": 5,
+    "created_at": "2025-05-27 23:48:35",
+    "updated_at": "2025-05-27 23:48:35",
+    "image": "products/ML8iNiYohel7izpB1T7HBuD25Bkaw2sUZJzgFINN.jpg"
+  }
+]

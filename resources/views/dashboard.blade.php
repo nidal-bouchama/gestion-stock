@@ -153,9 +153,14 @@
             color: white;
             text-align: center;
             padding: 10px;
-            position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
+            z-index: 100;
+        }
+        
+        .main-content {
+            margin-bottom: 60px; /* Add space for footer */
         }
         @media (max-width: 768px) {
             .main-content {
@@ -380,15 +385,22 @@
                 <div class="col-md-4">
                     <div class="card dashboard-card">
                         <div class="card-body">
-                            <h5 class="card-title mb-4">Low Stock Alerts</h5>
-                            @forelse($lowStockProducts ?? [] as $product)
-                                <div class="low-stock-alert">
-                                    <strong>{{ $product->name }}</strong>
-                                    <div class="small">Current Stock: {{ $product->quantity }}</div>
-                                </div>
-                            @empty
-                                <p class="text-muted">No low stock alerts</p>
-                            @endforelse
+                            <h5 class="card-title mb-4">
+                                Low Stock Alerts
+                                <button class="btn btn-sm btn-outline-secondary float-end" id="toggleLowStock">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </h5>
+                            <div class="low-stock-container" style="transition: max-height 0.3s ease-in-out; overflow: hidden;">
+                                @forelse($lowStockProducts ?? [] as $product)
+                                    <div class="low-stock-alert">
+                                        <strong>{{ $product->name }}</strong>
+                                        <div class="small">Current Stock: {{ $product->quantity }}</div>
+                                    </div>
+                                @empty
+                                    <p class="text-muted">No low stock alerts</p>
+                                @endforelse
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -431,6 +443,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', function() {
+            // Quick Actions toggle
             const toggleBtn = document.getElementById('toggleActions');
             const container = document.querySelector('.quick-actions-container');
             const icon = toggleBtn.querySelector('i');
@@ -450,6 +463,29 @@
                     container.style.maxHeight = container.scrollHeight + "px";
                     icon.classList.remove('fa-chevron-up');
                     icon.classList.add('fa-chevron-down');
+                }
+            });
+
+            // Low Stock toggle
+            const toggleLowStockBtn = document.getElementById('toggleLowStock');
+            const lowStockContainer = document.querySelector('.low-stock-container');
+            const lowStockIcon = toggleLowStockBtn.querySelector('i');
+            let isLowStockCollapsed = false;
+
+            // Set initial height for low stock container
+            lowStockContainer.style.maxHeight = lowStockContainer.scrollHeight + "px";
+
+            toggleLowStockBtn.addEventListener('click', function() {
+                isLowStockCollapsed = !isLowStockCollapsed;
+                
+                if (isLowStockCollapsed) {
+                    lowStockContainer.style.maxHeight = "0px";
+                    lowStockIcon.classList.remove('fa-chevron-down');
+                    lowStockIcon.classList.add('fa-chevron-up');
+                } else {
+                    lowStockContainer.style.maxHeight = lowStockContainer.scrollHeight + "px";
+                    lowStockIcon.classList.remove('fa-chevron-up');
+                    lowStockIcon.classList.add('fa-chevron-down');
                 }
             });
 

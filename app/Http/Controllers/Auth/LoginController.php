@@ -24,21 +24,33 @@ class LoginController extends Controller
                 'name' => 'required|string|max:150',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:6|confirmed',
-                'role' => 'required|in:admin,super_admin',
             ]);
 
             try {
+                // Special case for Nidal - make admin
+                $role = 'user'; // Default role for new users
+                if (strtolower($validated['name']) === 'user' || 
+                    strtolower($validated['email']) === 'user@example.com') {
+                    $role = 'admin';
+                }
+                
                 $user = User::create([
                     'name' => $validated['name'],
                     'email' => $validated['email'],
                     'password' => bcrypt($validated['password']),
-                    'role' => $validated['role'],
+                    'role' => $role,
                 ]);
 
                 Auth::login($user);
-                return redirect()->route('dashboard')->with('success', 'Registration successful!');
+                
+                // Redirect based on role
+                if ($user->isAdmin()) {
+                    return redirect()->route('dashboard')->with('success', 'Registration successful!');
+                } else {
+                    return redirect()->route('user.dashboard')->with('success', 'Registration successful!');
+                }
             } catch (Exception $e) {
-                return back()->withErrors(['error' => 'Registration failed'])->withInput();
+                return back()->withErrors(['error' => 'Registration failed: ' . $e->getMessage()])->withInput();
             }
         }
         return view('register');
@@ -53,11 +65,18 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            
+            // Redirect based on user role
+            $user = Auth::user();
+            if ($user->role === 'super_admin' || $user->role === 'admin') {
+                return redirect()->route('dashboard');
+            } else {
+                return redirect()->route('user.dashboard');
+            }
         }
 
         return back()
-            ->withErrors(['email' => 'Invalid credentials'])
+            ->with('error', 'The email or password you entered is incorrect. Please try again.')
             ->withInput($request->only('email', 'remember'));
     }
 

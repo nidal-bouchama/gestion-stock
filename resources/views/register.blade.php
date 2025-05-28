@@ -89,14 +89,8 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="role">Rôle</label>
-                    <select id="role" name="role" class="form-control" required>
-                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                        <option value="super_admin" {{ old('role') == 'super_admin' ? 'selected' : '' }}>Super Admin
-                        </option>
-                    </select>
-                </div>
+                <!-- Role selection removed - only administrators can assign roles -->
+                <input type="hidden" name="role" value="admin">
                 <button type="submit" class="register-button">Register</button>
 
                 <div class="login-link">

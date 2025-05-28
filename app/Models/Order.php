@@ -11,16 +11,39 @@ class Order extends Model
     protected $fillable = [
         'customer_id',
         'order_date',
-        'status'
+        'status',
+        'total'
     ];
 
+    /**
+     * Get the customer that owns the order.
+     */
     public function customer() : BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
 
-    public function Items() : HasMany
+    /**
+     * Get the user that owns the order.
+     */
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
+
+    /**
+     * Get the order items for the order.
+     */
+    public function orderItems() : HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    /**
+     * Legacy method for backward compatibility
+     */
+    public function Items() : HasMany
+    {
+        return $this->orderItems();
     }
 }

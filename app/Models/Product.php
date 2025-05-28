@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'category_id',
         'name',
@@ -21,6 +24,9 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+    /**
+     * Get the category that owns the product.
+     */
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -32,13 +38,16 @@ class Product extends Model
 
     public function getImageUrlAttribute()
     {
-        if ($this->image) {
-            $imageData = stream_get_contents($this->image);
-            return 'data:image/jpeg;base64,' . base64_encode($imageData);
+         if ($this->image) {
+        // If the image field already contains 'products/', use as is
+        $imagePath = str_starts_with($this->image, 'products/')
+            ? $this->image
+            : 'products/' . $this->image;
+
+        if (\Storage::disk('public')->exists($imagePath)) {
+            return asset('storage/' . $imagePath);
         }
-        if ($this->image && Storage::disk('public')->exists('products/' . $this->image)) {
-            return asset('storage/products/' . $this->image);
-        }
-        return asset('Images/default-product.png');
+    }
+    return asset('Images/default-product.png');
     }
 }
