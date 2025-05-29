@@ -1,5 +1,6 @@
-e<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@ e<!DOCTYPE html>
 
         body {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
@@ -29,9 +30,9 @@ e<!DOCTYPE html>
             padding: 10px 20px;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
-        
+
         .navbar a {
             color: #ffffff;
             text-decoration: none;
@@ -41,17 +42,17 @@ e<!DOCTYPE html>
             border-radius: 4px;
             transition: all 0.3s ease;
         }
-        
+
         .navbar a:hover {
             color: #ffc107;
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
         }
-        
+
         .navbar a.active {
-            background-color: rgba(40,167,69,0.2);
-            color: #28a745;
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
         }
-        
+
         .logout-btn {
             background-color: #dc3545;
             color: white !important;
@@ -61,7 +62,7 @@ e<!DOCTYPE html>
             transition: all 0.3s ease;
             margin-left: auto;
         }
-        
+
         .logout-btn:hover {
             background-color: #c82333;
             transform: translateY(-2px);
@@ -75,10 +76,18 @@ e<!DOCTYPE html>
             align-items: center;
             margin-right: 30px;
         }
-        
-        .logo-text span:first-child { color: rgb(193, 0, 0); }
-        .logo-text span:nth-child(2) { color: white; }
-        .logo-text span:last-child { color: #2ecc71; }
+
+        .logo-text span:first-child {
+            color: rgb(193, 0, 0);
+        }
+
+        .logo-text span:nth-child(2) {
+            color: white;
+        }
+
+        .logo-text span:last-child {
+            color: #2ecc71;
+        }
 
         .main-content {
             margin-top: 30px;
@@ -90,7 +99,7 @@ e<!DOCTYPE html>
             background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .product-item {
@@ -98,7 +107,7 @@ e<!DOCTYPE html>
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -108,7 +117,7 @@ e<!DOCTYPE html>
 
         .product-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
         }
 
         .product-name {
@@ -119,7 +128,7 @@ e<!DOCTYPE html>
         }
 
         footer {
-            background-color: rgb(44, 62, 80);
+            background-color: #000 !important;
             color: white;
             text-align: center;
             padding: 10px;
@@ -134,7 +143,7 @@ e<!DOCTYPE html>
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .category-btn {
@@ -148,6 +157,7 @@ e<!DOCTYPE html>
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo-text">
@@ -157,7 +167,9 @@ e<!DOCTYPE html>
         </div>
         <a href="{{ route('user.dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i> Home</a>
         <a href="{{ route('products.browse') }}" class="active"><i class="fas fa-box me-1"></i> Products</a>
-        <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
+        <a href="#" class="logout-btn"
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
+                class="fas fa-sign-out-alt me-1"></i> Logout</a>
     </nav>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
@@ -170,8 +182,9 @@ e<!DOCTYPE html>
                 <h5 class="mb-3"><i class="fas fa-filter me-2"></i>Filter by Category</h5>
                 <div>
                     <button class="btn btn-sm btn-outline-primary category-btn active" data-category="all">All</button>
-                    @foreach($categories ?? [] as $category)
-                        <button class="btn btn-sm btn-outline-primary category-btn" data-category="{{ $category->id }}">{{ $category->name }}</button>
+                    @foreach ($categories ?? [] as $category)
+                        <button class="btn btn-sm btn-outline-primary category-btn"
+                            data-category="{{ $category->id }}">{{ $category->name }}</button>
                     @endforeach
                 </div>
             </div>
@@ -192,23 +205,26 @@ e<!DOCTYPE html>
                 <div class="card-body">
                     <div class="row" id="productsContainer">
                         @forelse($products ?? [] as $product)
-                            <div class="col-md-4 col-lg-3 mb-4 product-item-wrapper" data-category="{{ $product->category_id ?? 'none' }}">
+                            <div class="col-md-4 col-lg-3 mb-4 product-item-wrapper"
+                                data-category="{{ $product->category_id ?? 'none' }}">
                                 <div class="product-item">
-                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="mb-2" 
+                                    <img src="{{ $product->image_url }}" alt="{{ $product->name }}" class="mb-2"
                                         style="max-width: 150px; max-height: 150px;"
                                         onerror="this.onerror=null;this.src='{{ asset('Images/default-product.png') }}';">
                                     <h5 class="product-name">{{ $product->name }}</h5>
                                     <p class="text-muted small">{{ Str::limit($product->description, 60) }}</p>
                                     <div class="d-flex justify-content-between align-items-center w-100">
                                         <span class="badge bg-primary rounded-pill">{{ $product->price }} DH</span>
-                                        <span class="badge bg-secondary rounded-pill">Stock: {{ $product->quantity }}</span>
+                                        <span class="badge bg-secondary rounded-pill">Stock:
+                                            {{ $product->quantity }}</span>
                                     </div>
-                                    
+
                                     <div class="mt-3 w-100">
                                         <form action="{{ route('user.cart.add') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                            <button type="submit" class="btn btn-success btn-sm w-100" {{ $product->quantity <= 0 ? 'disabled' : '' }}>
+                                            <button type="submit" class="btn btn-success btn-sm w-100"
+                                                {{ $product->quantity <= 0 ? 'disabled' : '' }}>
                                                 <i class="fas fa-cart-plus me-1"></i> Add to Cart
                                             </button>
                                         </form>
@@ -243,10 +259,13 @@ e<!DOCTYPE html>
                     const productWrappers = document.querySelectorAll('.product-item-wrapper');
 
                     productWrappers.forEach(wrapper => {
-                        const productName = wrapper.querySelector('.product-name').textContent.toLowerCase();
-                        const productDescription = wrapper.querySelector('p').textContent.toLowerCase();
-                        
-                        if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
+                        const productName = wrapper.querySelector('.product-name').textContent
+                            .toLowerCase();
+                        const productDescription = wrapper.querySelector('p').textContent
+                            .toLowerCase();
+
+                        if (productName.includes(searchTerm) || productDescription.includes(
+                                searchTerm)) {
                             wrapper.style.display = '';
                         } else {
                             wrapper.style.display = 'none';
@@ -261,15 +280,16 @@ e<!DOCTYPE html>
                 button.addEventListener('click', function() {
                     // Remove active class from all buttons
                     categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    
+
                     // Add active class to clicked button
                     this.classList.add('active');
-                    
+
                     const category = this.getAttribute('data-category');
                     const productWrappers = document.querySelectorAll('.product-item-wrapper');
-                    
+
                     productWrappers.forEach(wrapper => {
-                        if (category === 'all' || wrapper.getAttribute('data-category') === category) {
+                        if (category === 'all' || wrapper.getAttribute('data-category') ===
+                            category) {
                             wrapper.style.display = '';
                         } else {
                             wrapper.style.display = 'none';
@@ -294,4 +314,5 @@ e<!DOCTYPE html>
         });
     </script>
 </body>
+
 </html>

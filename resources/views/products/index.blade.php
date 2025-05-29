@@ -9,30 +9,121 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/Product/Index.css') }}">
+    
+    <style>
+        /* Header styles to match dashboard */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #5d87b7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+        }
+
+        .logo span {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 1px;
+        }
+
+        .logo span:first-child {
+            color: #e74c3c;
+        }
+
+        .logo span:nth-child(2) {
+            color: whitesmoke;
+        }
+
+        .logo span:last-child {
+            color: #27ae60;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #e74c3c;
+        }
+
+        .logout-btn {
+            background: none !important;
+            color: #2c3e50 !important;
+            padding: 0;
+            font-weight: 500;
+        }
+
+        .logout-btn:hover {
+            color: #e74c3c !important;
+        }
+
+        /* Footer styles to match dashboard */
+        footer {
+            background: #222 !important;
+            color: #fff;
+            text-align: center;
+            padding: 25px 0 15px 0;
+            font-size: 1rem;
+            margin-top: 40px;
+            position: relative;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="logo-text">
-            <span>Gestion</span>
-            <span>Stock</span>
-            <span>Web</span>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span>Gestion</span>
+                    <span>Stock</span>
+                    <span>Web</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+                    <li><a href="{{ route('products.index') }}" class="active"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="{{ route('suppliers.index') }}"><i class="fas fa-truck"></i> Suppliers</a></li>
+                    <li><a href="{{ route('customers.index') }}"><i class="fas fa-users"></i> Customers</a></li>
+                    <li><a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                    <li><a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly"></i> Stock Arrivals</a></li>
+                    <li>
+                        <a href="#" class="logout-btn"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <a href="/dashboard"><i class="fas fa-tachometer-alt me-1"></i> Home</a>
-        <a href="/products" class="active"><i class="fas fa-box me-1"></i> Products</a>
-        <a href="/suppliers"><i class="fas fa-truck me-1"></i> Suppliers</a>
-        <a href="/customers"><i class="fas fa-users me-1"></i> Customers</a>
-        <a href="/orders"><i class="fas fa-shopping-cart me-1"></i> Orders</a>
-        <a href="/stock-arrivals"><i class="fas fa-dolly me-1"></i> Stock Arrivals</a>
-        <div class="ms-auto">
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-            <a href="#" class="logout-btn"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                    class="fas fa-sign-out-alt me-1"></i> Logout</a>
-        </div>
-    </nav>
+    </header>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 
     <div class="container mt-4 mb-5">
         <div class="row">
@@ -103,7 +194,7 @@
     </div>
 
     <footer>
-        &copy; 2025 Gestion Stock Web. All rights reserved.
+        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved. | Designed with nidal
     </footer>
 
     <!-- Modal for Delete Confirmation -->

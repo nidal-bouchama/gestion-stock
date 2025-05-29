@@ -19,7 +19,7 @@
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
             display: flex;
@@ -27,12 +27,12 @@
         }
 
         .navbar {
-            background: var(--primary-color);
+            background: #5d87b7;
             padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .logo-text {
@@ -58,25 +58,25 @@
         }
 
         .btn-back {
-            background: #95a5a6;
-            color: white;
+            color: #2c3e50;
             padding: 0.6rem 1.2rem;
             border-radius: 4px;
             text-decoration: none;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-back:hover {
-            background: #7f8c8d;
-            color: white;
+            color: #e74c3c;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .register-container {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             padding: 2rem;
             margin: 2rem auto;
             max-width: 500px;
@@ -129,7 +129,7 @@
         }
 
         .register-button {
-            background: var(--primary-color);
+            background: #2c3e50;
             color: white;
             border: none;
             padding: 0.75rem 1rem;
@@ -142,9 +142,9 @@
         }
 
         .register-button:hover {
-            background: #1a252f;
+            background: #e74c3c;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .login-link {
@@ -164,11 +164,12 @@
         }
 
         footer {
-            background-color: var(--primary-color);
-            color: white;
+            background: #000 !important;
+            color: #fff;
             text-align: center;
-            padding: 1rem;
-            margin-top: auto;
+            padding: 25px 0 15px 0;
+            font-size: 1rem;
+            margin-top: 40px;
         }
 
         .alert {
@@ -184,7 +185,8 @@
             border-color: #f5c6cb;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
             padding: 0.75rem 1rem;
             border: 1px solid #ddd;
@@ -192,7 +194,8 @@
             transition: all 0.3s;
         }
 
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);
             outline: none;
@@ -264,7 +267,7 @@
 
                 <!-- Role selection removed - only administrators can assign roles -->
                 <input type="hidden" name="role" value="admin">
-                <button type="submit" class="register-button">Register</button>
+                <button type="submit" class="register-button">Sign Up</button>
 
                 <div class="login-link">
                     Already have an account? <a href="/login">Login</a>

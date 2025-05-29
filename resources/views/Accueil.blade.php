@@ -9,11 +9,270 @@
     <link rel="stylesheet" href="{{ asset('css/Accueil.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #5d87b7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px 0;
+        }
+
+        .logo span {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #e74c3c;
+            margin-right: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #e74c3c;
+        }
+
+        .register-btn,
+        .login-btn {
+            background: #e74c3c;
+            color: #fff !important;
+            padding: 7px 18px;
+            border-radius: 20px;
+            transition: background 0.2s;
+        }
+
+        .register-btn:hover,
+        .login-btn:hover {
+            background: #c0392b;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, rgba(231, 76, 60, 0.7) 0%, rgba(52, 152, 219, 0.7) 100%), url('{{ asset('Images/background-img.jpg') }}') no-repeat center center;
+            background-size: cover;
+            color: #fff;
+            padding: 90px 0 70px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+        }
+
+        .hero-content .cta-btn {
+            background: #fff;
+            color: #e74c3c;
+            padding: 14px 38px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .hero-content .cta-btn:hover {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        .stats-section {
+            background: #fff;
+            padding: 50px 0;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat i {
+            font-size: 2.5rem;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+
+        .stat h3 {
+            font-size: 2rem;
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        .stat p {
+            color: #555;
+            margin: 8px 0 0 0;
+            font-size: 1.1rem;
+        }
+
+        .features-section {
+            background: #f9f9f9;
+            padding: 70px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 35px;
+        }
+
+        .feature-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+            padding: 35px 25px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.03);
+        }
+
+        .feature-card i {
+            font-size: 2.2rem;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .about-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content h3 {
+            font-size: 1.7rem;
+            color: #2c3e50;
+            margin-bottom: 18px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .testimonials-section {
+            background: #f9f9f9;
+            padding: 70px 0;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .testimonials-header h2 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+        }
+
+        .testimonials-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+            padding: 30px 25px;
+            max-width: 340px;
+            text-align: center;
+        }
+
+        .testimonial-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-card h5 {
+            color: #e74c3c;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .testimonial-card span {
+            color: #888;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 25px 0 15px 0;
+            font-size: 1rem;
+            margin-top: 40px;
+        }
+    </style>
 
 <body>
     <!-- Header & Navigation -->
-    <header>
-        <div class="container">
+    <header>        <div class="container">
             <nav>
                 <div class="logo">
                     <span>Gestion</span>
@@ -22,9 +281,10 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
-                    <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
-                    <li><a href="/register" class="register-btn"><i class="fas fa-user-plus"></i> Register</a></li>
-                    <li><a href="/login" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+                    <li><a href="#testimonials"><i class="fas fa-users"></i> Testimonials</a></li>
+                    <li><a href="/register"><i class="fas fa-user-pen"></i> Sign Up</a></li>
+                    <li><a href="/login"><i class="fas fa-right-to-bracket"></i> Login</a></li>
                 </ul>
             </nav>
         </div>
@@ -33,315 +293,120 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Transform Your Inventory Management</h1>
-            <p>Suivi, Organisation, Optimisation.</p>
+            <h1>Empower Your Inventory Management</h1>
+            <p>Modern, intuitive, and powerful tools for seamless stock control and business growth.</p>
+            <a href="/register" class="cta-btn">Get Started Free <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
 
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="stat">
+            <i class="fas fa-box"></i>
+            <h3>12,000+</h3>
+            <p>Products Managed</p>
+        </div>
+        <div class="stat">
+            <i class="fas fa-users"></i>
+            <h3>2,500+</h3>
+            <p>Active Users</p>
+        </div>
+        <div class="stat">
+            <i class="fas fa-warehouse"></i>
+            <h3>50+</h3>
+            <p>Warehouses</p>
+        </div>
+        <div class="stat">
+            <i class="fas fa-globe"></i>
+            <h3>15</h3>
+            <p>Countries Served</p>
+        </div>
+    </section>
 
-    <section id="about" class="about-section" style="padding: 80px 0; background-color: #f9f9f9;">
+    <!-- Features Section -->
+    <section id="features" class="features-section">
         <div class="container">
             <div class="section-header" style="text-align: center; margin-bottom: 50px;">
-                <h2 style="font-size: 2.5rem; color: #2c3e50; position: relative; display: inline-block;">
-                    About
-                    <span
-                        style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background-color: #e74c3c;"></span>
-                </h2>
+                <h2 style="font-size: 2.2rem; color: #2c3e50;">Key Features</h2>
             </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Real-Time Analytics</h4>
+                    <p>Monitor your inventory and sales with up-to-date dashboards and smart insights.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-bell"></i>
+                    <h4>Automated Alerts</h4>
+                    <p>Get instant notifications for low stock, order status, and supplier updates.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Mobile Friendly</h4>
+                    <p>Manage your stock on the go with a responsive and intuitive interface.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h4>Secure & Reliable</h4>
+                    <p>Advanced security and backup features to keep your data safe and accessible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <div class="about-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <h3 style="font-size: 1.8rem; color: #2c3e50; margin-bottom: 20px;">Our Mission</h3>
-                <p style="font-size: 1.1rem; line-height: 1.6; color: #555;">
-                    A stock management website is a digital platform designed to help businesses efficiently track and
-                    manage their inventory. It allows users to monitor stock levels, process orders, and streamline
-                    supply chain operations. Key features typically include real-time inventory updates, reporting tools
-                    for analyzing trends, and alerts for low stock levels. This tool enhances operational efficiency,
-                    reduces costs, and supports informed decision-making, ultimately leading to better resource
-                    management and increased profitability.
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-size: 2.2rem; color: #2c3e50;">About Us</h2>
+            </div>
+            <div class="about-content">
+                <h3>Our Mission</h3>
+                <p>
+                    Gestion Stock Web is dedicated to helping businesses of all sizes streamline their inventory
+                    processes, reduce costs, and maximize efficiency. Our platform offers real-time tracking, insightful
+                    analytics, and seamless integration with your workflow.
                 </p>
-                <div class="mission-points"
-                    style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 40px;">
-                    <div class="point"
-                        style="flex: 1; min-width: 200px; margin: 15px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                        <h4 style="color: #e74c3c; margin-bottom: 10px;">Quality Materials</h4>
-                        <p>reliable inventory items that meet standards for durability and performance, ensuring
-                            efficient operations and customer satisfaction.</p>
-                    </div>
-                    <div class="point"
-                        style="flex: 1; min-width: 200px; margin: 15px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                        <h4 style="color: #e74c3c; margin-bottom: 10px;">Customer Focus</h4>
-                        <p>stock management involves prioritizing customer needs and preferences in inventory decisions,
-                            ensuring product availability, timely delivery, and responsive service to enhance
-                            satisfaction and loyalty.</p>
-                    </div>
-                    <!-- Services Section -->
-                    <section id="services" class="services-section" style="padding: 80px 0; background-color: #fff;">
-                        <div class="container">
-                            <div class="section-header" style="text-align: center; margin-bottom: 50px;">
-                                <h2
-                                    style="font-size: 2.5rem; color: #2c3e50; position: relative; display: inline-block;">
-                                    Our Premium Services
-                                    <span
-                                        style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background-color: #e74c3c;"></span>
-                                </h2>
-                                <p style="font-size: 1.2rem; color: #555; margin-top: 20px;">Comprehensive solutions for
-                                    your inventory management needs</p>
-                            </div>
+            </div>
+        </div>
+    </section>
 
-                            <div class="services-grid"
-                                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2>What Our Clients Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client 1">
+                    <p>“Gestion Stock Web has transformed the way we manage our inventory. The real-time analytics and
+                        alerts are game changers!”</p>
+                    <h5>Ali Ben Salah</h5>
+                    <span>Operations Manager</span>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client 2">
+                    <p>“The platform is intuitive and mobile-friendly. Our team can now track stock from anywhere,
+                        anytime.”</p>
+                    <h5>Sarah El Amrani</h5>
+                    <span>Warehouse Supervisor</span>
+                </div>
+                <div class="testimonial-card">
+                    <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Client 3">
+                    <p>“Excellent support and robust features. Highly recommended for any business looking to optimize
+                        inventory.”</p>
+                    <h5>Mohamed Khelifi</h5>
+                    <span>Business Owner</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                                <!-- Inventory Management -->
-                                <div class="service-card"
-                                    style="background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: all 0.3s ease; position: relative;">
-                                    <div class="service-badge"
-                                        style="position: absolute; top: 15px; right: 15px; background: #e74c3c; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">
-                                        HOT</div>
-                                    <div class="service-image"
-                                        style="height: 200px; overflow: hidden; background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); display: flex; align-items: center; justify-content: center; position: relative;">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
-                                            alt="Inventory Management"
-                                            style="width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));">
-                                        <div class="service-icon"
-                                            style="position: absolute; bottom: -25px; right: 25px; width: 60px; height: 60px; background: #e74c3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);">
-                                            <i class="fas fa-boxes" style="color: white; font-size: 1.5rem;"></i>
-                                        </div>
-                                    </div>
-                                    <div class="service-content" style="padding: 30px 25px 25px;">
-                                        <h3
-                                            style="font-size: 1.5rem; color: #2c3e50; margin-bottom: 15px; position: relative; padding-bottom: 10px;">
-                                            Inventory Management
-                                            <span
-                                                style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #e74c3c;"></span>
-                                        </h3>
-                                        <p
-                                            style="color: #666; margin-bottom: 20px; line-height: 1.6; min-height: 72px;">
-                                            Complete control over your stock with real-time tracking, automated alerts,
-                                            and multi-warehouse support.
-                                        </p>
-                                        <ul style="margin-bottom: 20px; padding-left: 20px; color: #555;">
-                                            <li style="margin-bottom: 8px;">Real-time stock monitoring</li>
-                                            <li style="margin-bottom: 8px;">Barcode scanning integration</li>
-                                            <li style="margin-bottom: 8px;">Automated low stock alerts</li>
-                                        </ul>
-                                        <div
-                                            style="display: flex; justify-content: space-between; align-items: center;">
-                                            <a href="/products" class="btn"
-                                                style="display: inline-block; background: #e74c3c; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; transition: all 0.3s ease; font-weight: 500;">
-                                                Explore <i class="fas fa-arrow-right ms-2"></i>
-                                            </a>
-                                            <span style="font-size: 0.9rem; color: #e74c3c; font-weight: 600;">
-                                                <i class="fas fa-star"></i> 4.9/5
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Supplier Management -->
-                                <div class="service-card"
-                                    style="background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: all 0.3s ease; position: relative;">
-                                    <div class="service-image"
-                                        style="height: 200px; overflow: hidden; background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); display: flex; align-items: center; justify-content: center; position: relative;">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/3058/3058979.png"
-                                            alt="Supplier Management"
-                                            style="width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));">
-                                        <div class="service-icon"
-                                            style="position: absolute; bottom: -25px; right: 25px; width: 60px; height: 60px; background: #2ecc71; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);">
-                                            <i class="fas fa-truck" style="color: white; font-size: 1.5rem;"></i>
-                                        </div>
-                                    </div>
-                                    <div class="service-content" style="padding: 30px 25px 25px;">
-                                        <h3
-                                            style="font-size: 1.5rem; color: #2c3e50; margin-bottom: 15px; position: relative; padding-bottom: 10px;">
-                                            Supplier Network
-                                            <span
-                                                style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #2ecc71;"></span>
-                                        </h3>
-                                        <p
-                                            style="color: #666; margin-bottom: 20px; line-height: 1.6; min-height: 72px;">
-                                            Streamline your supplier relationships with centralized contact management
-                                            and performance tracking.
-                                        </p>
-                                        <ul style="margin-bottom: 20px; padding-left: 20px; color: #555;">
-                                            <li style="margin-bottom: 8px;">Supplier performance metrics</li>
-                                            <li style="margin-bottom: 8px;">Automated reordering</li>
-                                            <li style="margin-bottom: 8px;">Contact management</li>
-                                        </ul>
-                                        <div
-                                            style="display: flex; justify-content: space-between; align-items: center;">
-                                            <a href="/suppliers" class="btn"
-                                                style="display: inline-block; background: #2ecc71; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; transition: all 0.3s ease; font-weight: 500;">
-                                                Explore <i class="fas fa-arrow-right ms-2"></i>
-                                            </a>
-                                            <span style="font-size: 0.9rem; color: #2ecc71; font-weight: 600;">
-                                                <i class="fas fa-star"></i> 4.7/5
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Order Processing -->
-                                <div class="service-card"
-                                    style="background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: all 0.3s ease; position: relative;">
-                                    <div class="service-badge"
-                                        style="position: absolute; top: 15px; right: 15px; background: #3498db; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;">
-                                        NEW</div>
-                                    <div class="service-image"
-                                        style="height: 200px; overflow: hidden; background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); display: flex; align-items: center; justify-content: center; position: relative;">
-                                        <img src="https://cdn-icons-png.flaticon.com/512/3132/3132693.png"
-                                            alt="Order Processing"
-                                            style="width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));">
-                                        <div class="service-icon"
-                                            style="position: absolute; bottom: -25px; right: 25px; width: 60px; height: 60px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);">
-                                            <i class="fas fa-shopping-cart"
-                                                style="color: white; font-size: 1.5rem;"></i>
-                                        </div>
-                                    </div>
-                                    <div class="service-content" style="padding: 30px 25px 25px;">
-                                        <h3
-                                            style="font-size: 1.5rem; color: #2c3e50; margin-bottom: 15px; position: relative; padding-bottom: 10px;">
-                                            Order Management
-                                            <span
-                                                style="position: absolute; bottom: 0; left: 0; width: 40px; height: 3px; background: #3498db;"></span>
-                                        </h3>
-                                        <p
-                                            style="color: #666; margin-bottom: 20px; line-height: 1.6; min-height: 72px;">
-                                            Efficient order processing from creation to fulfillment with automated
-                                            workflows and tracking.
-                                        </p>
-                                        <ul style="margin-bottom: 20px; padding-left: 20px; color: #555;">
-                                            <li style="margin-bottom: 8px;">Customer order tracking</li>
-                                            <li style="margin-bottom: 8px;">Automated workflows</li>
-                                            <li style="margin-bottom: 8px;">Full audit trails</li>
-                                        </ul>
-                                        <div
-                                            style="display: flex; justify-content: space-between; align-items: center;">
-                                            <a href="/orders" class="btn"
-                                                style="display: inline-block; background: #3498db; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; transition: all 0.3s ease; font-weight: 500;">
-                                                Explore <i class="fas fa-arrow-right ms-2"></i>
-                                            </a>
-                                            <span style="font-size: 0.9rem; color: #3498db; font-weight: 600;">
-                                                <i class="fas fa-star"></i> 4.8/5
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!-- Additional CTA -->
-                            <div style="text-align: center; margin-top: 60px;">
-                                <h3 style="font-size: 1.8rem; color: #2c3e50; margin-bottom: 20px;">Ready to Transform
-                                    Your Inventory Management?</h3>
-                                <p
-                                    style="font-size: 1.1rem; color: #555; max-width: 700px; margin: 0 auto 30px; line-height: 1.6;">
-                                    Our comprehensive suite of tools is designed to streamline your operations, reduce
-                                    costs, and improve efficiency.
-                                </p>
-                                <a href="/register" class="btn"
-                                    style="display: inline-block; background: #e74c3c; color: white; padding: 12px 30px; border-radius: 30px; text-decoration: none; transition: all 0.3s ease; font-weight: 600; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);">
-                                    Get Started Now <i class="fas fa-arrow-right ms-2"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </section>
-                    <footer>
-                        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved.
-                    </footer>
-                    <script>
-                        // Modal functionality
-                        const modal = document.getElementById("quoteModal");
-                        const quoteBtn = document.getElementById("quoteBtn");
-                        const heroQuoteBtn = document.getElementById("heroQuoteBtn");
-                        const closeBtn = document.querySelector(".close");
-                        const tabBtns = document.querySelectorAll(".tab-btn");
-                        const tabContents = document.querySelectorAll(".tab-content");
-
-                        // Open modal when quote button is clicked
-                        quoteBtn.addEventListener("click", function(e) {
-                            e.preventDefault();
-                            modal.style.display = "block";
-                        });
-
-                        heroQuoteBtn.addEventListener("click", function(e) {
-                            e.preventDefault();
-                            modal.style.display = "block";
-                        });
-
-                        // Close modal when X is clicked
-                        closeBtn.addEventListener("click", function() {
-                            modal.style.display = "none";
-                        });
-
-                        // Close modal when clicking outside
-                        window.addEventListener("click", function(e) {
-                            if (e.target === modal) {
-                                modal.style.display = "none";
-                            }
-                        });
-
-                        // Tab functionality
-                        tabBtns.forEach(btn => {
-                            btn.addEventListener("click", function() {
-                                const tabId = this.getAttribute("data-tab");
-
-                                // Remove active class from all buttons and contents
-                                tabBtns.forEach(btn => btn.classList.remove("active"));
-                                tabContents.forEach(content => content.classList.remove("active"));
-
-                                // Add active class to clicked button and corresponding content
-                                this.classList.add("active");
-                                document.getElementById(tabId).classList.add("active");
-                            });
-                        });
-
-                        // Form submission
-                        document.getElementById("quoteForm").addEventListener("submit", function(e) {
-                            e.preventDefault();
-                            alert("Thank you for your quote request! We'll contact you soon.");
-                            modal.style.display = "none";
-                            this.reset();
-                        });
-
-                        document.getElementById("registerForm").addEventListener("submit", function(e) {
-                            e.preventDefault();
-                            const password = document.getElementById("regPassword").value;
-                            const confirmPassword = document.getElementById("regConfirmPassword").value;
-
-                            if (password !== confirmPassword) {
-                                alert("Passwords don't match!");
-                                return;
-                            }
-
-                            alert("Registration successful! You can now log in.");
-                            modal.style.display = "none";
-                            this.reset();
-                        });
-                        document.getElementById('loginForm').addEventListener('submit', function(e) {
-                            e.preventDefault();
-
-                            const email = document.getElementById('email').value;
-                            const password = document.getElementById('password').value;
-
-                            // Basic validation
-                            if (!email || !password) {
-                                alert('Please fill in all required fields');
-                                return;
-                            }
-
-                            // Here you would typically send the data to your server
-                            console.log('Login attempt with:', {
-                                email,
-                                password
-                            });
-
-                            // For demo purposes - show success message
-                            alert('Login successful! (This is a demo)');
-
-                            // Reset form
-                            this.reset();
-                        });
-                    </script>
+    <!-- Footer -->
+    <footer>
+        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved. | Designed with nidal
+    </footer>
 </body>
 
 </html>

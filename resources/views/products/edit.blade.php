@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,8 +76,17 @@
             background: #c0392b;
             color: white;
         }
+
+        footer {
+            background-color: #000 !important;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo-text">
@@ -88,7 +98,8 @@
             <a href="{{ route('products.index') }}" class="btn-back">
                 <i class="fas fa-arrow-left me-2"></i>Back
             </a>
-            <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a href="#" class="logout-btn"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt me-1"></i>Logout
             </a>
         </div>
@@ -96,17 +107,21 @@
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
-    
+
     <div class="container mt-4">
         <div class="card product-edit-card shadow-sm">
             <div class="row g-0">
                 <!-- Product Image Column -->
                 <div class="col-md-5">
                     <div class="product-image-container">
-                        <img src="{{ $product->image_url ?? asset('Images/default-product.png') }}" alt="Product Image" class="product-image img-fluid" id="product-image-preview" onerror="this.onerror=null;this.src='{{ asset('Images/default-product.png') }}';">
+                        <img src="{{ $product->image_url ?? asset('Images/default-product.png') }}" alt="Product Image"
+                            class="product-image img-fluid" id="product-image-preview"
+                            onerror="this.onerror=null;this.src='{{ asset('Images/default-product.png') }}';">
                         <div class="mt-3">
-                            <input type="file" id="image-upload" style="display: none;" accept="image/*" name="image">
-                            <button type="button" class="image-upload-btn" onclick="document.getElementById('image-upload').click()">
+                            <input type="file" id="image-upload" style="display: none;" accept="image/*"
+                                name="image">
+                            <button type="button" class="image-upload-btn"
+                                onclick="document.getElementById('image-upload').click()">
                                 <i class="fas fa-camera me-2"></i> Upload Image
                             </button>
                         </div>
@@ -120,17 +135,19 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Form Column -->
                 <div class="col-md-7">
                     <div class="form-container">
                         <h2 class="card-title">Edit Product</h2>
-                        <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('products.update', $product->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
                                 <label for="name" class="form-label">Name product</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $product->name) }}" required>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="{{ old('name', $product->name) }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
@@ -141,44 +158,50 @@
                                     <label for="price" class="form-label">Price (DH)</label>
                                     <div class="input-group">
                                         <span class="input-group-text">DH</span>
-                                        <input type="number" step="0.01" class="form-control" id="price" name="price" value="{{ old('price', $product->price) }}" required>
+                                        <input type="number" step="0.01" class="form-control" id="price"
+                                            name="price" value="{{ old('price', $product->price) }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="quantity" class="form-label">Quantity</label>
-                                    <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $product->quantity) }}" required>
+                                    <input type="number" class="form-control" id="quantity" name="quantity"
+                                        value="{{ old('quantity', $product->quantity) }}" required>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="category_id" class="form-label">Category</label>
                                 <select class="form-control" id="category_id" name="category_id">
                                     <option value="">-- Select a category --</option>
-                                    @foreach($categories as $category)
-                                        <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            {{ $product->category_id == $category->id ? 'selected' : '' }}>
+                                            {{ $category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            @if($errors->any())
+                            @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul class="mb-0">
-                                        @foreach($errors->all() as $error)
+                                        @foreach ($errors->all() as $error)
                                             <li>{{ $error }}</li>
                                         @endforeach
                                     </ul>
                                 </div>
                             @endif
                             <div class="d-flex justify-content-between align-items-center mt-4">
-                                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i> Save Changes</button>
-                                    <a href="{{ route('products.index') }}" class="btn btn-secondary"><i class="fas fa-times me-1"></i> Cancel</a>
-                                </div>
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-save me-1"></i> Save
+                                    Changes</button>
+                                <a href="{{ route('products.index') }}" class="btn btn-secondary"><i
+                                        class="fas fa-times me-1"></i> Cancel</a>
                             </div>
-                        </form>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    
+    </div>
+
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -201,7 +224,7 @@
             </div>
         </div>
     </div>
-    
+
     <footer>
         &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved.
     </footer>
@@ -219,7 +242,7 @@
                 reader.readAsDataURL(file);
             }
         });
-        
+
         // Form validation
         document.querySelector('form').addEventListener('submit', function(e) {
             const price = document.getElementById('price').value;
@@ -230,4 +253,5 @@
         });
     </script>
 </body>
+
 </html>

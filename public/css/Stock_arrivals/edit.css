@@ -380,11 +380,11 @@
         /* Valid State */
         .form-control.is-valid,
         .was-validated .form-control:valid {
-            border-color: #28a745;
+            border-color: #e74c3c;
             background-image: none;
         }
 
         .form-control.is-valid:focus,
         .was-validated .form-control:valid:focus {
-            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.15);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.15);
         }

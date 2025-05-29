@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,181 +8,162 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" type="image" href="Images/logo.svg">
-    <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
-    
+    {{-- <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}"> --}} {{-- Assuming styles are moved inline --}}
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif; /* Match Accueil font */
+        }
+
+        html, body {
+            height: 100%; /* Ensure html and body take full height */
         }
 
         body {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+                url('{{ asset('Images/background-img.jpg') }}') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            min-height: 100vh; /* Use min-height for sticky footer */
+            color: #2c3e50; /* Match Accueil text color */
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles matching Accueil */
         header {
-            background-color: #2c3e50;
-            padding: 1rem 2rem;
+            background: #5d87b7;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: white;
+            padding: 2px 0; /* Match Accueil padding */
         }
 
-        .logo {
-            font-size: 1.5rem;
+        .logo-text { /* Renamed from .logo in Accueil, but styles match */
             font-weight: bold;
-            display: flex;
+            font-size: 1.5rem;
+            display: flex; /* Ensure spans are inline-flex */
             align-items: center;
         }
 
-        .logo span:first-child { color: rgb(193, 0, 0); }
-        .logo span:nth-child(2) { color: white; }
-        .logo span:last-child { color: #2ecc71; }
+        .logo-text span:first-child {
+            color: #e74c3c; /* Match Accueil color */
+        }
+
+        .logo-text span:nth-child(2) {
+            color: white;
+        }
+
+        .logo-text span:last-child {
+            color: white; /* Match Accueil color */
+        }
 
         .nav-links {
+            list-style: none;
             display: flex;
-            gap: 1.5rem;
+            gap: 25px;
+            margin: 0; /* Remove default ul margin */
+            padding: 0; /* Remove default ul padding */
+        }
+
+        .nav-links li {
+            display: inline-block; /* Ensure list items are inline */
         }
 
         .nav-links a {
-            color: white;
+            color: #2c3e50; /* Match Accueil color */
             text-decoration: none;
             font-weight: 500;
+            transition: color 0.2s;
+            padding: 8px 12px; /* Add some padding for click area */
+            border-radius: 4px;
         }
 
-        body {
-            background-image: url('Images/home-hero-bg.jpg'); /* Replace with actual image URL */
-            background-size: cover;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #2c3e50;
+        .nav-links a:hover {
+            color: #e74c3c;
         }
-        .navbar {
-            background-color: rgb(44, 62, 80);
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+
+        .nav-links a.active { /* Style for active link */
+             color: #e74c3c;
+             /* Optional: add a subtle background or border */
+             /* background-color: rgba(231, 76, 60, 0.1); */
         }
-        .navbar a {
-            color: #ffffff;
-            text-decoration: none;
-            margin-right: 20px;
-            font-weight: 500;
-            padding: 8px 12px;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+
+        .logout-btn { /* Styled to match .register-btn, .login-btn in Accueil */
+            background: #e74c3c !important; /* Use !important to override bootstrap */
+            color: #fff !important;
+            padding: 7px 18px !important; /* Use !important to override bootstrap */
+            border-radius: 20px !important; /* Use !important to override bootstrap */
+            transition: background 0.2s;
+            font-weight: 500; /* Match Accueil font-weight */
         }
-        .navbar a:hover {
-            color: #ffc107;
-            background-color: rgba(255,255,255,0.1);
-        }
-        
-        .navbar a.active {
-            background-color: rgba(40,167,69,0.2);
-            color: #28a745;
-        }
-        
-        .logout-btn {
-            background-color: #dc3545;
-            color: white !important;
-            font-weight: bold;
-            padding: 8px 15px !important;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            margin-left: auto;
-        }
-        
+
         .logout-btn:hover {
-            background-color: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+            background: #c0392b !important; /* Use !important to override bootstrap */
+            color: #fff !important;
         }
+
+
         .main-content {
             margin-top: 30px;
             padding: 20px;
+            flex-grow: 1; /* Allow main content to grow and push footer down */
         }
+
         .dashboard-card {
             background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             border-radius: 12px;
             transition: transform 0.2s;
         }
+
         .dashboard-card:hover {
             transform: translateY(-5px);
         }
-        .dashboard-title { font-weight: 700; color: #2c3e50; }
-        .dashboard-welcome { color: #636e72; }
-        .stats-card { background: linear-gradient(135deg, #2980b9, #3498db); color: white; }
-        .stats-icon { font-size: 2.5rem; opacity: 0.8; }
-        .stats-number { font-size: 1.8rem; font-weight: bold; }
+
+        .dashboard-title {
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .dashboard-welcome {
+            color: #636e72;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            color: white;
+        }
+
+        .stats-icon {
+            font-size: 2.5rem;
+            opacity: 0.8;
+        }
+
+        .stats-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
         .card-title {
             font-weight: 700;
             color: #34495e;
         }
-        .quick-action {
-            transition: all 0.3s;
-        }
-        .quick-action:hover {
-            transform: scale(1.05);
-        }
-        .low-stock-alert {
-            background-color: #fff3cd;
-            color: #856404;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-        }
-        .activity-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-        }
-        .activity-item:last-child {
-            border-bottom: none;
-        }
-        footer {
-            background-color: rgb(44, 62, 80);
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 100;
-        }
-        
-        .main-content {
-            margin-bottom: 60px; /* Add space for footer */
-        }
-        @media (max-width: 768px) {
-            .main-content {
-                margin-left: 0;
-                padding: 20px 5px 5px 5px;
-            }
-        }
-        .logo-text {
-            font-weight: bold;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            margin-right: 30px;
-        }
-        
-        .logo-text span:first-child { color: rgb(193, 0, 0); }
-        .logo-text span:nth-child(2) { color: white; }
-        .logo-text span:last-child { color: #2ecc71; }
 
         .quick-action {
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; /* Added ease */
             border: none;
             position: relative;
             overflow: hidden;
@@ -189,11 +171,11 @@
 
         .quick-action:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .action-icon {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
             padding: 10px;
             border-radius: 8px;
             margin-right: 15px;
@@ -225,40 +207,107 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .quick-actions-container {
+        .quick-actions-container,
+        .low-stock-container { /* Apply transition to both containers */
             overflow: hidden;
             transition: max-height 0.3s ease-in-out;
         }
 
-        .quick-actions-container.collapsed {
-            max-height: 0;
+        .quick-actions-container.collapsed,
+        .low-stock-container.collapsed { /* Apply collapsed class to both */
+            max-height: 0 !important; /* Use !important to ensure collapse */
+        }
+
+        .low-stock-alert {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+        }
+
+        .activity-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+
+        /* Footer styles matching Accueil */
+        footer {
+            background: #222 !important; /* Use !important to override bootstrap */
+            color: #fff;
+            text-align: center;
+            padding: 25px 0 15px 0;
+            font-size: 1rem;
+            margin-top: auto; /* Push footer to the bottom */
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 20px 5px; /* Adjusted padding */
+            }
+            .nav-links {
+                gap: 15px; /* Reduce gap on smaller screens */
+            }
+            .nav-links a {
+                padding: 5px 8px; /* Reduce padding on smaller screens */
+            }
+            .logout-btn {
+                 padding: 5px 10px !important; /* Reduce padding on smaller screens */
+            }
         }
     </style>
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="logo-text">
-            <span>Gestion</span>
-            <span>Stock</span>
-            <span>Web</span>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-text">
+                    <span>Gestion</span>
+                    <span>Stock</span>
+                    <span>Web</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ route('dashboard') }}" class="active"><i class="fas fa-tachometer-alt"></i> Home</a>
+                    </li>
+                    <li><a href="{{ route('products.index') }}"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="{{ route('suppliers.index') }}"><i class="fas fa-truck"></i> Suppliers</a></li>
+                    <li><a href="{{ route('customers.index') }}"><i class="fas fa-users"></i> Customers</a></li>
+                    <li><a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                    <li><a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly"></i> Stock Arrivals</a>
+                    </li>
+                    <li>
+                        <a href="#" class="logout-btn"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <a href="{{ route('dashboard') }}" class="active"><i class="fas fa-tachometer-alt me-1"></i> Home</a>
-        <a href="{{ route('products.index') }}"><i class="fas fa-box me-1"></i> Products</a>
-        <a href="{{ route('suppliers.index') }}"><i class="fas fa-truck me-1"></i> Suppliers</a>
-        <a href="{{ route('customers.index') }}"><i class="fas fa-users me-1"></i> Customers</a>
-        <a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart me-1"></i> Orders</a>
-        <a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly me-1"></i> Stock Arrivals</a>
-        <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt me-1"></i> Logout</a>
-    </nav>
+    </header>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
     <div class="main-content">
-        <div class="container-fluid">
+        <div class="container"> {{-- Added container around main content --}}
             <!-- Stats Cards -->
             <div class="row mb-4">
                 <div class="col-md-3">
@@ -328,7 +377,8 @@
                             </h5>
                             <div class="quick-actions-container">
                                 <div class="d-grid gap-2 fade-in">
-                                    <a href="{{ route('products.create') }}" class="btn btn-primary quick-action mb-2 action-btn">
+                                    <a href="{{ route('products.create') }}"
+                                        class="btn btn-primary quick-action mb-2 action-btn">
                                         <div class="d-flex align-items-center">
                                             <div class="action-icon">
                                                 <i class="fas fa-plus"></i>
@@ -339,8 +389,9 @@
                                             </div>
                                         </div>
                                     </a>
-                                    
-                                    <a href="{{ route('stock-arrivals.create') }}" class="btn btn-success quick-action mb-2 action-btn">
+
+                                    <a href="{{ route('stock-arrivals.create') }}"
+                                        class="btn btn-success quick-action mb-2 action-btn">
                                         <div class="d-flex align-items-center">
                                             <div class="action-icon">
                                                 <i class="fas fa-truck"></i>
@@ -351,8 +402,9 @@
                                             </div>
                                         </div>
                                     </a>
-                                    
-                                    <a href="{{ route('orders.create') }}" class="btn btn-info quick-action mb-2 action-btn">
+
+                                    <a href="{{ route('orders.create') }}"
+                                        class="btn btn-info quick-action mb-2 action-btn">
                                         <div class="d-flex align-items-center">
                                             <div class="action-icon">
                                                 <i class="fas fa-cart-plus"></i>
@@ -364,7 +416,8 @@
                                         </div>
                                     </a>
 
-                                    <a href="{{ route('categories.create') }}" class="btn btn-warning quick-action action-btn">
+                                    <a href="{{ route('categories.create') }}"
+                                        class="btn btn-warning quick-action action-btn">
                                         <div class="d-flex align-items-center">
                                             <div class="action-icon">
                                                 <i class="fas fa-tags"></i>
@@ -391,7 +444,7 @@
                                     <i class="fas fa-chevron-down"></i>
                                 </button>
                             </h5>
-                            <div class="low-stock-container" style="transition: max-height 0.3s ease-in-out; overflow: hidden;">
+                            <div class="low-stock-container"> {{-- Removed inline style --}}
                                 @forelse($lowStockProducts ?? [] as $product)
                                     <div class="low-stock-alert">
                                         <strong>{{ $product->name }}</strong>
@@ -454,13 +507,15 @@
 
             toggleBtn.addEventListener('click', function() {
                 isCollapsed = !isCollapsed;
-                
+
                 if (isCollapsed) {
                     container.style.maxHeight = "0px";
+                    container.classList.add('collapsed'); // Add collapsed class
                     icon.classList.remove('fa-chevron-down');
                     icon.classList.add('fa-chevron-up');
                 } else {
                     container.style.maxHeight = container.scrollHeight + "px";
+                     container.classList.remove('collapsed'); // Remove collapsed class
                     icon.classList.remove('fa-chevron-up');
                     icon.classList.add('fa-chevron-down');
                 }
@@ -477,13 +532,15 @@
 
             toggleLowStockBtn.addEventListener('click', function() {
                 isLowStockCollapsed = !isLowStockCollapsed;
-                
+
                 if (isLowStockCollapsed) {
                     lowStockContainer.style.maxHeight = "0px";
+                    lowStockContainer.classList.add('collapsed'); // Add collapsed class
                     lowStockIcon.classList.remove('fa-chevron-down');
                     lowStockIcon.classList.add('fa-chevron-up');
                 } else {
                     lowStockContainer.style.maxHeight = lowStockContainer.scrollHeight + "px";
+                    lowStockContainer.classList.remove('collapsed'); // Remove collapsed class
                     lowStockIcon.classList.remove('fa-chevron-up');
                     lowStockIcon.classList.add('fa-chevron-down');
                 }
@@ -495,7 +552,7 @@
                 btn.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-2px)';
                 });
-                
+
                 btn.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0)';
                 });
@@ -503,7 +560,8 @@
         });
     </script>
     <footer>
-        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved.
+        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved. | Designed with nidal
     </footer>
 </body>
+
 </html>

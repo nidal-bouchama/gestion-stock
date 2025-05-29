@@ -48,8 +48,8 @@
         }
         
         .navbar a.active {
-            background-color: rgba(40,167,69,0.2);
-            color: #28a745;
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
         }
         
         .logout-btn {
