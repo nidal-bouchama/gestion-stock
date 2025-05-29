@@ -15,11 +15,14 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Arial, sans-serif; /* Match Accueil font */
+            font-family: 'Segoe UI', Arial, sans-serif;
+            /* Match Accueil font */
         }
 
-        html, body {
-            height: 100%; /* Ensure html and body take full height */
+        html,
+        body {
+            height: 100%;
+            /* Ensure html and body take full height */
         }
 
         body {
@@ -28,8 +31,10 @@
             background-size: cover;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* Use min-height for sticky footer */
-            color: #2c3e50; /* Match Accueil text color */
+            min-height: 100vh;
+            /* Use min-height for sticky footer */
+            color: #2c3e50;
+            /* Match Accueil text color */
         }
 
         .container {
@@ -48,78 +53,81 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2px 0; /* Match Accueil padding */
+            padding: 10px 0;
+            /* Updated padding per products index */
         }
 
-        .logo-text { /* Renamed from .logo in Accueil, but styles match */
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-right: auto;
+        }
+
+        .logo span {
             font-weight: bold;
             font-size: 1.5rem;
-            display: flex; /* Ensure spans are inline-flex */
-            align-items: center;
+            margin-right: 1px;
         }
 
-        .logo-text span:first-child {
-            color: #e74c3c; /* Match Accueil color */
+        .logo span:first-child {
+            color: #e74c3c;
         }
 
-        .logo-text span:nth-child(2) {
-            color: white;
+        .logo span:nth-child(2) {
+            color: whitesmoke;
         }
 
-        .logo-text span:last-child {
-            color: white; /* Match Accueil color */
+        .logo span:last-child {
+            color: #27ae60;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
             gap: 25px;
-            margin: 0; /* Remove default ul margin */
-            padding: 0; /* Remove default ul padding */
-        }
-
-        .nav-links li {
-            display: inline-block; /* Ensure list items are inline */
+            margin: 0;
+            /* Remove default ul margin */
+            padding: 0;
+            /* Remove default ul padding */
         }
 
         .nav-links a {
-            color: #2c3e50; /* Match Accueil color */
+            color: #2c3e50;
+            /* Match Accueil color */
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
-            padding: 8px 12px; /* Add some padding for click area */
-            border-radius: 4px;
         }
 
         .nav-links a:hover {
             color: #e74c3c;
         }
 
-        .nav-links a.active { /* Style for active link */
-             color: #e74c3c;
-             /* Optional: add a subtle background or border */
-             /* background-color: rgba(231, 76, 60, 0.1); */
+        .nav-links a.active {
+            /* Style for active link */
+            color: #e74c3c;
+            /* Optional: add a subtle background or border */
+            /* background-color: rgba(231, 76, 60, 0.1); */
         }
 
-        .logout-btn { /* Styled to match .register-btn, .login-btn in Accueil */
-            background: #e74c3c !important; /* Use !important to override bootstrap */
-            color: #fff !important;
-            padding: 7px 18px !important; /* Use !important to override bootstrap */
-            border-radius: 20px !important; /* Use !important to override bootstrap */
-            transition: background 0.2s;
-            font-weight: 500; /* Match Accueil font-weight */
+        .logout-btn {
+            /* Styled to match .register-btn, .login-btn in Accueil */
+            background: none !important;
+            color: #2c3e50 !important;
+            padding: 0;
+            font-weight: 500;
         }
 
         .logout-btn:hover {
-            background: #c0392b !important; /* Use !important to override bootstrap */
-            color: #fff !important;
+            color: #e74c3c !important;
         }
 
 
         .main-content {
             margin-top: 30px;
             padding: 20px;
-            flex-grow: 1; /* Allow main content to grow and push footer down */
+            flex-grow: 1;
+            /* Allow main content to grow and push footer down */
         }
 
         .dashboard-card {
@@ -163,7 +171,8 @@
         }
 
         .quick-action {
-            transition: all 0.3s ease; /* Added ease */
+            transition: all 0.3s ease;
+            /* Added ease */
             border: none;
             position: relative;
             overflow: hidden;
@@ -219,14 +228,17 @@
         }
 
         .quick-actions-container,
-        .low-stock-container { /* Apply transition to both containers */
+        .low-stock-container {
+            /* Apply transition to both containers */
             overflow: hidden;
             transition: max-height 0.3s ease-in-out;
         }
 
         .quick-actions-container.collapsed,
-        .low-stock-container.collapsed { /* Apply collapsed class to both */
-            max-height: 0 !important; /* Use !important to ensure collapse */
+        .low-stock-container.collapsed {
+            /* Apply collapsed class to both */
+            max-height: 0 !important;
+            /* Use !important to ensure collapse */
         }
 
         .low-stock-alert {
@@ -249,27 +261,36 @@
 
         /* Footer styles matching Accueil */
         footer {
-            background: #222 !important; /* Use !important to override bootstrap */
+            background: #222 !important;
+            /* Use !important to override bootstrap */
             color: #fff;
             text-align: center;
             padding: 25px 0 15px 0;
             font-size: 1rem;
-            margin-top: auto; /* Push footer to the bottom */
+            margin-top: auto;
+            /* Push footer to the bottom */
             width: 100%;
         }
 
         @media (max-width: 768px) {
             .main-content {
-                padding: 20px 5px; /* Adjusted padding */
+                padding: 20px 5px;
+                /* Adjusted padding */
             }
+
             .nav-links {
-                gap: 15px; /* Reduce gap on smaller screens */
+                gap: 15px;
+                /* Reduce gap on smaller screens */
             }
+
             .nav-links a {
-                padding: 5px 8px; /* Reduce padding on smaller screens */
+                padding: 5px 8px;
+                /* Reduce padding on smaller screens */
             }
+
             .logout-btn {
-                 padding: 5px 10px !important; /* Reduce padding on smaller screens */
+                padding: 5px 10px !important;
+                /* Reduce padding on smaller screens */
             }
         }
     </style>
@@ -279,19 +300,29 @@
     <header>
         <div class="container">
             <nav>
-                <div class="logo-text">
+                <div class="logo">
                     <span>Gestion</span>
                     <span>Stock</span>
                     <span>Web</span>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="{{ route('dashboard') }}" class="active"><i class="fas fa-tachometer-alt"></i> Home</a>
+                    <li><a href="{{ route('dashboard') }}" class="active">
+                            <i class="fas fa-tachometer-alt"></i> Home</a>
                     </li>
-                    <li><a href="{{ route('products.index') }}"><i class="fas fa-box"></i> Products</a></li>
-                    <li><a href="{{ route('suppliers.index') }}"><i class="fas fa-truck"></i> Suppliers</a></li>
-                    <li><a href="{{ route('customers.index') }}"><i class="fas fa-users"></i> Customers</a></li>
-                    <li><a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-                    <li><a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly"></i> Stock Arrivals</a>
+                    <li><a href="{{ route('products.index') }}">
+                            <i class="fas fa-box"></i> Products</a>
+                    </li>
+                    <li><a href="{{ route('suppliers.index') }}">
+                            <i class="fas fa-truck"></i> Suppliers</a>
+                    </li>
+                    <li><a href="{{ route('customers.index') }}">
+                            <i class="fas fa-users"></i> Customers</a>
+                    </li>
+                    <li><a href="{{ route('orders.index') }}">
+                            <i class="fas fa-shopping-cart"></i> Orders</a>
+                    </li>
+                    <li><a href="{{ route('stock-arrivals.index') }}">
+                            <i class="fas fa-dolly"></i> Stock Arrivals</a>
                     </li>
                     <li>
                         <a href="#" class="logout-btn"
@@ -515,7 +546,7 @@
                     icon.classList.add('fa-chevron-up');
                 } else {
                     container.style.maxHeight = container.scrollHeight + "px";
-                     container.classList.remove('collapsed'); // Remove collapsed class
+                    container.classList.remove('collapsed'); // Remove collapsed class
                     icon.classList.remove('fa-chevron-up');
                     icon.classList.add('fa-chevron-down');
                 }
