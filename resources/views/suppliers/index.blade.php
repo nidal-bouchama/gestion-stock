@@ -13,22 +13,31 @@
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="logo-text">
-            <span>Gestion</span>
-            <span>Stock</span>
-            <span>Web</span>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span>Gestion</span>
+                    <span>Stock</span>
+                    <span>Web</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+                    <li><a href="{{ route('products.index') }}"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="{{ route('suppliers.index') }}" class="active"><i class="fas fa-truck"></i> Suppliers</a></li>
+                    <li><a href="{{ route('customers.index') }}"><i class="fas fa-users"></i> Customers</a></li>
+                    <li><a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                    <li><a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly"></i> Stock Arrivals</a></li>
+                    <li>
+                        <a href="#" class="logout-btn"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i> Home</a>
-        <a href="{{ route('products.index') }}"><i class="fas fa-box me-1"></i> Products</a>
-        <a href="{{ route('suppliers.index') }}" class="active"><i class="fas fa-truck me-1"></i> Suppliers</a>
-        <a href="{{ route('customers.index') }}"><i class="fas fa-users me-1"></i> Customers</a>
-        <a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart me-1"></i> Orders</a>
-        <a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly me-1"></i> Stock Arrivals</a>
-        <a href="#" class="logout-btn" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <i class="fas fa-sign-out-alt me-1"></i> Logout
-        </a>
-    </nav>
+    </header>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
@@ -149,7 +158,7 @@
     </div>
 
     <footer>
-        &copy; 2025 Gestion Stock Web. All rights reserved.
+        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved. | Designed with nidal
     </footer>
 
     <!-- Delete Confirmation Modal -->
@@ -219,8 +228,15 @@
                 const searchTerm = searchInput.value.toLowerCase();
 
                 tableRows.forEach(row => {
-                    const nameCell = row.querySelector('td:nth-child(2)');
-                    if (nameCell.textContent.toLowerCase().includes(searchTerm)) {
+                    const nameCell = row.querySelector('td:nth-child(1)');
+                    const contactCell = row.querySelector('td:nth-child(2)');
+                    const phoneCell = row.querySelector('td:nth-child(3)');
+                    
+                    const name = nameCell ? nameCell.textContent.toLowerCase() : '';
+                    const contact = contactCell ? contactCell.textContent.toLowerCase() : '';
+                    const phone = phoneCell ? phoneCell.textContent.toLowerCase() : '';
+                    
+                    if (name.includes(searchTerm) || contact.includes(searchTerm) || phone.includes(searchTerm)) {
                         row.style.display = '';
                     } else {
                         row.style.display = 'none';
@@ -236,6 +252,49 @@
                 if (supplierForm.style.display === 'block') {
                     document.getElementById('name').focus();
                 }
+            });
+
+            // Button hover effects with enhanced animations
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                });
+
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '';
+                });
+            });
+
+            // Navbar links hover effects
+            const navLinks = document.querySelectorAll('.nav-links a:not(.logout-btn)');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.backgroundColor = 'rgba(255,255,255,0.1)';
+                    }
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active')) {
+                        this.style.backgroundColor = '';
+                    }
+                });
+            });
+
+            // Form input focus effects
+            const formInputs = document.querySelectorAll('.form-control');
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                    this.parentElement.style.transition = 'transform 0.3s ease';
+                });
+
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = '';
+                });
             });
         });
     </script>

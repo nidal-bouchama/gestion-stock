@@ -9,90 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/Product/Index.css') }}">
-    
-    <style>
-        /* Header styles to match dashboard */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        header {
-            background: #5d87b7;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            margin-right: auto;
-        }
-
-        .logo span {
-            font-weight: bold;
-            font-size: 1.5rem;
-            margin-right: 1px;
-        }
-
-        .logo span:first-child {
-            color: #e74c3c;
-        }
-
-        .logo span:nth-child(2) {
-            color: whitesmoke;
-        }
-
-        .logo span:last-child {
-            color: #27ae60;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        .nav-links a {
-            color: #2c3e50;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #e74c3c;
-        }
-
-        .logout-btn {
-            background: none !important;
-            color: #2c3e50 !important;
-            padding: 0;
-            font-weight: 500;
-        }
-
-        .logout-btn:hover {
-            color: #e74c3c !important;
-        }
-
-        /* Footer styles to match dashboard */
-        footer {
-            background: #222 !important;
-            color: #fff;
-            text-align: center;
-            padding: 25px 0 15px 0;
-            font-size: 1rem;
-            margin-top: 40px;
-            position: relative;
-        }
-    </style>
 </head>
 
 <body>
@@ -106,11 +22,13 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
-                    <li><a href="{{ route('products.index') }}" class="active"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="{{ route('products.index') }}" class="active"><i class="fas fa-box"></i> Products</a>
+                    </li>
                     <li><a href="{{ route('suppliers.index') }}"><i class="fas fa-truck"></i> Suppliers</a></li>
                     <li><a href="{{ route('customers.index') }}"><i class="fas fa-users"></i> Customers</a></li>
                     <li><a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
-                    <li><a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly"></i> Stock Arrivals</a></li>
+                    <li><a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly"></i> Stock Arrivals</a>
+                    </li>
                     <li>
                         <a href="#" class="logout-btn"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -269,7 +187,7 @@
             // Delete confirmation functionality
             let productIdToDelete = null;
             const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
-            
+
             // Set up event listeners for all delete buttons
             const deleteButtons = document.querySelectorAll('.delete-confirm');
             deleteButtons.forEach(button => {
@@ -278,13 +196,14 @@
                     deleteModal.show();
                 });
             });
-            
+
             // Handle the confirmation button click
             const confirmDeleteButton = document.getElementById('confirmDelete');
             confirmDeleteButton.addEventListener('click', function() {
                 if (productIdToDelete) {
                     // Find the form for this product and submit it
-                    const form = document.querySelector(`button[data-id="${productIdToDelete}"]`).closest('form');
+                    const form = document.querySelector(`button[data-id="${productIdToDelete}"]`).closest(
+                        'form');
                     form.submit();
                 }
                 deleteModal.hide();
