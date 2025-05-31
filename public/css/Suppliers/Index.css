@@ -74,7 +74,7 @@ nav {
     color: #2c3e50;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.3s;
 }
 
 .nav-links a:hover {
@@ -115,8 +115,6 @@ nav {
     }
 }
 
-
-
 .form-control {
     max-width: 400px;
     border-radius: 4px;
@@ -147,6 +145,12 @@ nav {
     background-color: var(--secondary-color);
     color: white;
     font-weight: 500;
+}
+.card-header {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 15px;
+    border-radius: 8px 8px 0 0;
 }
 
 .table td,
@@ -195,7 +199,7 @@ footer {
 
     .navbar a {
         margin: 5px;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .form-control {

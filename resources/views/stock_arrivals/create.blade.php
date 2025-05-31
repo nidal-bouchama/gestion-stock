@@ -11,228 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="icon" type="image" href="{{ asset('Images/logo.svg') }}">
-    <style>
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --success-color: #2ecc71;
-            --light-bg: #f8f9fa;
-        }
-
-        body {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .navbar {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 12px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar a {
-            color: #ffffff;
-            margin-right: 15px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .navbar a:hover {
-            color: var(--primary-color);
-        }
-
-        .stock-arrivals-card {
-            margin-top: 30px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 15px;
-            border: none;
-            background-color: rgba(255, 255, 255, 0.95);
-            transition: transform 0.3s ease;
-        }
-
-        .stock-arrivals-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .stock-arrivals-title {
-            font-weight: 700;
-            color: var(--secondary-color);
-            position: relative;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-        }
-
-        .stock-arrivals-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--primary-color);
-            border-radius: 2px;
-        }
-
-        .back-btn {
-            background-color: var(--light-bg);
-            color: var(--secondary-color) !important;
-            font-weight: 600;
-            padding: 8px 20px !important;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            margin-right: 15px;
-            border: 1px solid #dee2e6;
-        }
-
-        .back-btn:hover {
-            background-color: #e2e6ea;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .logout-btn {
-            background-color: var(--accent-color);
-            color: white !important;
-            font-weight: 600;
-            padding: 8px 20px !important;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            margin-left: auto;
-            border: none;
-        }
-
-        .logout-btn:hover {
-            background-color: #c0392b;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
-        }
-
-        .logo-text {
-            font-weight: bold;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            margin-right: 30px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .logo-text span:first-child {
-            color: #e74c3c;
-        }
-
-        .logo-text span:nth-child(2) {
-            color: white;
-        }
-
-        .logo-text span:last-child {
-            color: var(--success-color);
-        }
-
-        footer {
-            background-color: var(--secondary-color);
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: auto;
-            font-size: 0.9rem;
-        }
-
-        .form-label {
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 8px;
-        }
-
-        .form-control,
-        .select2-container--default .select2-selection--single {
-            border-radius: 8px;
-            padding: 10px 15px;
-            border: 1px solid #ced4da;
-            transition: all 0.3s;
-        }
-
-        .form-control:focus,
-        .select2-container--default.select2-container--focus .select2-selection--single {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-primary:hover {
-            background-color: #2980b9;
-            border-color: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-        }
-
-        .alert {
-            border-radius: 8px;
-        }
-
-        .select2-container--default .select2-selection--single {
-            height: auto;
-        }
-
-        .select2-container--default .select2-selection--single .select2-selection__arrow {
-            height: 100%;
-        }
-
-        .supplier-info,
-        .product-info {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .info-title {
-            font-weight: 600;
-            color: var(--secondary-color);
-            margin-bottom: 5px;
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-wrap: wrap;
-            }
-
-            .logo-text {
-                margin-bottom: 10px;
-                width: 100%;
-            }
-
-            .back-btn,
-            .logout-btn {
-                margin: 5px 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/stock_arrivals/create.css') }}">
 </head>
 
 <body>
@@ -249,16 +28,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <a href="{{ route('stock-arrivals.index') }}" class="back-btn"><i class="fas fa-arrow-left me-2"></i>
                     Back</a>
-                <a href="#" class="logout-btn"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                        class="fas fa-sign-out-alt me-1"></i> Logout</a>
             </div>
         </div>
     </nav>
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -300,16 +72,16 @@
                                     @endforeach
                                 </select>
                                 <div class="product-info mt-2">
-                                    <div class="row">
-                                        <div class="col-md-4">
+                                    <div>
+                                        <div class="mb-2">
                                             <div class="info-title">Category:</div>
                                             <div id="productCategory" class="text-muted"></div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="mb-2">
                                             <div class="info-title">Price:</div>
                                             <div id="productPrice" class="text-muted"></div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div>
                                             <div class="info-title">Current Stock:</div>
                                             <div id="productStock" class="text-muted"></div>
                                         </div>
@@ -409,7 +181,7 @@
                 if (category || price || stock) {
                     $('.product-info').fadeIn();
                     $('#productCategory').text(category || 'N/A');
-                    $('#productPrice').text(price ? '$' + price : 'N/A');
+                    $('#productPrice').text((price && price !== '0.00') ? price + ' DH' : 'N/A');
                     $('#productStock').text(stock || '0');
                 } else {
                     $('.product-info').fadeOut();

@@ -135,7 +135,7 @@
                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                     <h2><i class="fas fa-list me-2"></i> Orders List</h2>
                                     <div class="search-box">
-                                        <i class="fas fa-search"></i>
+                                        
                                         <input type="text" id="searchOrders" class="form-control"
                                             placeholder="Search orders...">
                                     </div>
@@ -146,11 +146,11 @@
                                         <table class="table table-hover" id="ordersTable">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th>Customer</th>
-                                                    <th>Date</th>
-                                                    <th>Status</th>
-                                                    <th>Created</th>
-                                                    <th>Actions</th>
+                                                    <th style="color: aliceblue">Customer</th>
+                                                    <th style="color: aliceblue">Date</th>
+                                                    <th style="color: aliceblue">Status</th>
+                                                    <th style="color: aliceblue">Created</th>
+                                                    <th style="color: aliceblue">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -174,26 +174,21 @@
                                                             </span>
                                                         </td>
                                                         <td>{{ $order->created_at->diffForHumans() }}</td>
-                                                        <td class="action-buttons">
+                                                        <td class="action-buttons d-flex gap-2">
                                                             <a href="{{ route('orders.edit', $order->id) }}"
-                                                                class="btn btn-warning btn-sm"
+                                                                class="btn btn-warning btn-sm d-flex align-items-center justify-content-center"
                                                                 data-bs-toggle="tooltip" title="Edit Order">
                                                                 <i class="fas fa-edit"></i>
                                                             </a>
                                                             <form action="{{ route('orders.destroy', $order->id) }}"
-                                                                method="POST" class="d-inline delete-order-form">
+                                                                method="POST" class="d-inline delete-order-form m-0 p-0">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                                <button type="submit" class="btn btn-danger btn-sm d-flex align-items-center justify-content-center"
                                                                     data-bs-toggle="tooltip" title="Delete Order">
                                                                     <i class="fas fa-trash-alt"></i>
                                                                 </button>
                                                             </form>
-                                                            <a href="{{ route('orders.show', $order->id) }}"
-                                                                class="btn btn-info btn-sm" data-bs-toggle="tooltip"
-                                                                title="View Details">
-                                                                <i class="fas fa-eye"></i>
-                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

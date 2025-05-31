@@ -107,7 +107,7 @@ main {
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     border: none;
-    background-color: rgba(255, 255, 255, 0.97);
+
     transition: transform 0.3s ease;
 }
 
@@ -117,36 +117,102 @@ main {
 }
 
 .card-header {
-    background-color: #2c3e50;
-    color: white;
-    padding: 15px 20px;
+    background-color: #5d87b7;
+    padding: 20px 25px;
     border-bottom: none;
     border-radius: 12px 12px 0 0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* DataTables Custom Styling */
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 20px;
+    float: right;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid rgba(93, 135, 183, 0.3);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    width: 250px;
+    transition: all 0.3s ease;
+
+}
+
+.dataTables_wrapper .dataTables_filter input:focus {
+    outline: none;
+    border-color: #5d87b7;
+    box-shadow: 0 0 0 2px rgba(93, 135, 183, 0.25);
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid rgba(93, 135, 183, 0.3);
+    border-radius: 6px;
+    padding: 6px 30px 6px 10px;
+    font-size: 0.9rem;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(93, 135, 183, 0.1);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    padding: 8px 14px;
+    margin: 0 2px;
+    border-radius: 6px;
+    border: 1px solid rgba(93, 135, 183, 0.3);
+
+    color: #5d87b7 !important;
+    transition: all 0.3s ease;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background: #5d87b7 !important;
+    border-color: #5d87b7;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #5d87b7 !important;
+
+    border-color: #5d87b7;
+    font-weight: 500;
 }
 
 /* Enhanced table styles */
 .table-responsive {
-    border-radius: 8px;
+
+    border-radius: 12px;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(93, 135, 183, 0.1);
+    margin: 20px 0;
 }
 
 .table {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
+    margin-bottom: 0;
+    color: #3498db;
 }
 
 .table th {
-    background-color: #2c3e50;
-    color: #333;
+    background-color: var(--secondary-color);
+    color: #5d87b7;
     font-weight: 500;
-    padding: 12px 15px;
 }
 
-.table td {
-    padding: 12px 15px;
+.table td,
+.table th {
     vertical-align: middle;
-    border-bottom: 1px solid #eee;
+    padding: 12px 15px;
 }
 
 .table tr:nth-child(even) {
@@ -157,16 +223,18 @@ main {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
+.table tbody tr {
+    transition: background-color 0.3s ease;
+}
+
 /* Action buttons */
 .action-buttons {
     white-space: nowrap;
 }
 
 .action-buttons .btn {
-    padding: 6px 10px;
-    font-size: 0.875rem;
     margin-right: 5px;
-    min-width: 30px;
+    min-width: 70px;
 }
 
 /* Status badges */
@@ -236,6 +304,57 @@ main {
 .fab:hover {
     transform: translateY(-5px) scale(1.1);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Quick Actions Menu Styles */
+.quick-actions-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #5d87b7;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.quick-actions-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+#quickActionsMenu {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border: none;
+    z-index: 1000;
+}
+
+#quickActionsMenu .dropdown-item {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+#quickActionsMenu .dropdown-item:hover {
+    background-color: rgba(93, 135, 183, 0.1);
+    transform: translateX(5px);
+}
+
+#quickActionsMenu i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
 }
 
 /* Responsive styles */

@@ -10,6 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/Suppliers/Index.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -131,14 +132,13 @@
                                                         <a href="{{ route('suppliers.edit', $supplier->id) }}" class="btn btn-sm btn-warning">
                                                             <i class="fas fa-edit"></i> Edit
                                                         </a>
-                                                        <button class="btn btn-sm btn-danger delete-btn" 
-                                                            data-bs-toggle="modal" 
-                                                            data-bs-target="#deleteModal"
-                                                            data-supplier-id="{{ $supplier->id }}"
-                                                            data-supplier-name="{{ $supplier->name }}"
-                                                            data-delete-url="{{ route('suppliers.destroy', $supplier->id) }}">
-                                                            <i class="fas fa-trash-alt"></i> Delete
-                                                        </button>
+                                                        <form action="{{ route('suppliers.destroy', $supplier->id) }}" method="POST" class="d-inline delete-supplier-form">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger">
+                                                                <i class="fas fa-trash-alt"></i> Delete
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -161,32 +161,6 @@
         &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved. | Designed with nidal
     </footer>
 
-    <!-- Delete Confirmation Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="deleteModalLabel"><i class="fas fa-exclamation-triangle me-2"></i>Confirm Deletion</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this supplier? This action cannot be undone.</p>
-                    <p class="fw-bold">Supplier: <span id="supplierNameToDelete"></span></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times me-1"></i> Cancel</button>
-                    <form id="deleteForm" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">
-                            <i class="fas fa-trash-alt me-1"></i> Delete
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -204,18 +178,26 @@
                 }
             });
 
-            // Delete confirmation modal handling
-            const deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-            const deleteForm = document.getElementById('deleteForm');
-            const supplierNameToDelete = document.getElementById('supplierNameToDelete');
-            let currentDeleteUrl = '';
+            // Delete supplier with SweetAlert2
+            document.querySelectorAll('.delete-supplier-form').forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const supplierName = this.closest('tr').querySelector('td:first-child').textContent;
 
-            document.querySelectorAll('.delete-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const supplierName = this.getAttribute('data-supplier-name');
-                    currentDeleteUrl = this.getAttribute('data-delete-url');
-                    supplierNameToDelete.textContent = supplierName;
-                    deleteForm.action = currentDeleteUrl;
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: `Do you want to delete supplier "${supplierName}"? This action cannot be undone.`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#dc3545',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: '<i class="fas fa-trash-alt"></i> Yes, delete it!',
+                        cancelButtonText: '<i class="fas fa-times"></i> Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.submit();
+                        }
+                    });
                 });
             });
 
