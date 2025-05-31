@@ -10,6 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/Customers/Index.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -132,12 +133,12 @@
                         <table class="table table-hover" id="customersTable">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>Created At</th>
-                                    <th>Actions</th>
+                                    <th style="color: aliceblue">Name</th>
+                                    <th style="color: aliceblue">Email</th>
+                                    <th style="color: aliceblue">Phone</th>
+                                    <th style="color: aliceblue">Address</th>
+                                    <th style="color: aliceblue">Created At</th>
+                                    <th style="color: aliceblue">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -148,26 +149,19 @@
                                         <td>{{ $customer->phone ?? 'N/A' }}</td>
                                         <td>{{ Str::limit($customer->address ?? 'N/A', 20) }}</td>
                                         <td>{{ $customer->created_at->format('M d, Y') }}</td>
-                                        <td>
-                                            <div class="action-buttons">
-                                                <a href="{{ route('customers.edit', $customer->id) }}"
-                                                    class="btn btn-sm btn-warning" title="Edit">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <form action="{{ route('customers.destroy', $customer->id) }}"
-                                                    method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <!-- Change your delete buttons in the table to: -->
-                                                    <button class="btn btn-sm btn-danger delete-btn"
-                                                        data-id="{{ $customer->id }}"
-                                                        data-name="{{ $customer->name }}"
-                                                        data-action="{{ route('customers.destroy', $customer->id) }}"
-                                                        title="Delete">
-                                                        <i class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                        <td class="action-buttons">
+                                            <a href="{{ route('customers.edit', $customer->id) }}"
+                                                class="btn btn-sm btn-warning">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <form action="{{ route('customers.destroy', $customer->id) }}"
+                                                method="POST" class="d-inline delete-customer-form">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -216,8 +210,8 @@
     </footer>
 
     <!-- JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 
@@ -227,15 +221,50 @@
             $('#customersTable').DataTable({
                 responsive: true,
                 language: {
-                    search: "_INPUT_",
                     searchPlaceholder: "Search customers...",
-                },
-                columnDefs: [{
-                        orderable: false,
-                        targets: [6]
-                    } // Disable sorting for actions column
-                ]
+                }
             });
+
+            // Delete confirmation with SweetAlert2
+            $('.delete-customer-form').on('submit', function(e) {
+                e.preventDefault();
+                const form = this;
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+
+            // Show success and error messages
+            @if (session('success'))
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: '{{ session('success') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            @endif
+
+            @if (session('error'))
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'error',
+                    title: '{{ session('error') }}',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            @endif
 
             // Form submission handling
             $('#customerForm').on('submit', function(e) {
@@ -272,18 +301,6 @@
                     scrollTop: $(".form-section").offset().top - 20
                 }, 500);
             @endif
-
-            // Delete button click handler
-            $('.delete-btn').on('click', function(e) {
-                e.preventDefault();
-                const customerId = $(this).data('id');
-                const customerName = $(this).data('name');
-                const deleteUrl = $(this).data('action');
-
-                $('#customerName').text(customerName);
-                $('#deleteForm').attr('action', deleteUrl);
-                $('#deleteModal').modal('show');
-            });
         });
     </script>
 </body>

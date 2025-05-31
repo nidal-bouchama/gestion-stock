@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
@@ -49,7 +50,11 @@ class CustomerController extends Controller
 
     public function destroy(Customer $customer)
     {
-        $customer->delete();
-        return redirect()->route('customers.index')->with('success', 'Client supprimé avec succès.');
+        try {
+            $customer->delete();
+            return redirect()->route('customers.index')->with('success', 'Customer deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('customers.index')->with('error', 'Unable to delete the customer.');
+        }
     }
 }

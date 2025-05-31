@@ -100,7 +100,7 @@
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('stock-arrivals.destroy', $arrival->id) }}"
-                                                    method="POST" class="d-inline delete-form">
+                                                    method="POST" class="d-inline delete-arrival-form">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger"
@@ -170,74 +170,39 @@
                 const table = $('#stockArrivalsTable').DataTable({
                     responsive: true,
                     language: {
-                        search: "_INPUT_",
                         searchPlaceholder: "Search...",
                     },
-                    dom: '<"top"f>rt<"bottom"lip><"clear">',
-                    initComplete: function() {
-                        $('.dataTables_filter input').addClass('form-control');
-                    }
+                    dom: '<"top"f>rt<"bottom"lip><"clear">'
                 });
 
                 // Search functionality
-                document.getElementById('searchInput').addEventListener('keyup', function() {
+                document.getElementById('searchInput')?.addEventListener('keyup', function() {
                     table.search(this.value).draw();
                 });
 
                 // Delete confirmation with SweetAlert
-                document.querySelectorAll('.delete-form').forEach(form => {
-                    form.addEventListener('submit', function(e) {
-                        e.preventDefault();
+                $('.delete-arrival-form').on('submit', function(e) {
+                    e.preventDefault();
+                    const form = this;
 
-                        Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You won't be able to revert this!",
-                            icon: 'warning',
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                loadingSpinner.style.display = 'flex';
-                                form.submit();
-                            }
-                        });
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Show loading spinner
+                            loadingSpinner.style.display = 'flex';
+                            form.submit();
+                        }
                     });
                 });
 
-                // Initialize tooltips
-                const tooltipTriggerList = [].slice.call(document.querySelectorAll(
-                    '[data-bs-toggle="tooltip"]'));
-                tooltipTriggerList.map(function(tooltipTriggerEl) {
-                    return new bootstrap.Tooltip(tooltipTriggerEl);
-                });
-
-                // View details handler
-                document.querySelectorAll('.view-details').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const arrivalId = this.getAttribute('data-id');
-                        // Implement details view functionality
-                        loadingSpinner.style.display = 'flex';
-
-                        // Simulate API call
-                        setTimeout(() => {
-                            loadingSpinner.style.display = 'none';
-                            Swal.fire({
-                                title: 'Arrival Details #' + arrivalId,
-                                html: `<div class="text-start">
-                                    <p><strong>Supplier:</strong> ${$('#stockArrivalsTable tr[data-id="' + arrivalId + '"] td:nth-child(2)').text()}</p>
-                                    <p><strong>Product:</strong> ${$('#stockArrivalsTable tr[data-id="' + arrivalId + '"] td:nth-child(3)').text()}</p>
-                                    <p><strong>Quantity:</strong> ${$('#stockArrivalsTable tr[data-id="' + arrivalId + '"] td:nth-child(4)').text()}</p>
-                                    <p><strong>Arrival Date:</strong> ${$('#stockArrivalsTable tr[data-id="' + arrivalId + '"] td:nth-child(5)').text()}</p>
-                                </div>`,
-                                confirmButtonText: 'Close'
-                            });
-                        }, 500);
-                    });
-                });
-
-                // Notification for successful actions
+                // Success notifications
                 @if (session('success'))
                     Swal.fire({
                         position: 'top-end',

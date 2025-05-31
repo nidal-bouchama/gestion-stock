@@ -12,60 +12,18 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="icon" type="image" href="{{ asset('Images/logo.svg') }}">
     <link rel="stylesheet" href="{{ asset('css/Stock_arrivals/edit.css') }}">
-    <style>
-        .back-btn {
-            background: #95a5a6;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .back-btn:hover {
-            background: #7f8c8d;
-            color: yellow;
-        }
-
-        .logout-btn {
-            background: #e74c3c;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logout-btn:hover {
-            background: #c0392b;
-            color: white;
-            box-shadow: 0 0 10px rgba(231, 76, 60, 0.8);
-        }
-    </style>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="logo-text">
                 <span>Gestion</span>
                 <span>Stock</span>
                 <span>Web</span>
             </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <a href="{{ route('stock-arrivals.index') }}" class="back-btn"><i class="fas fa-arrow-left me-2"></i>
-                    Back</a>
-                <a href="#" class="logout-btn"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fas fa-sign-out-alt me-1"></i> Logout
-                </a>
-            </div>
+            <a href="{{ route('stock-arrivals.index') }}" class="back-btn ms-auto"><i class="fas fa-arrow-left me-2"></i>
+                Back</a>
         </div>
     </nav>
 
@@ -76,8 +34,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card stock-arrivals-card">
-                    <div class="card-body p-4">
+                <div class="edit-card">
+                    <div class="form-section">
                         <h1 class="stock-arrivals-title">Edit Stock Arrival</h1>
 
                         <div class="arrival-meta mb-4">
@@ -100,7 +58,7 @@
                             @csrf
                             @method('PUT')
 
-                            <div class="mb-4">
+                            <div class="form-group mb-4">
                                 <label for="supplier_id" class="form-label">Supplier <span
                                         class="text-danger">*</span></label>
                                 <select class="form-control select2" id="supplier_id" name="supplier_id" required>
@@ -119,7 +77,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-4">
+                            <div class="form-group mb-4">
                                 <label for="product_id" class="form-label">Product <span
                                         class="text-danger">*</span></label>
                                 <select class="form-control select2" id="product_id" name="product_id" required>
@@ -158,7 +116,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-4">
+                            <div class="form-group mb-4">
                                 <label for="quantity" class="form-label">Quantity <span
                                         class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="quantity" name="quantity"
@@ -166,7 +124,7 @@
                                 <small class="text-muted">Enter the number of units received</small>
                             </div>
 
-                            <div class="mb-4">
+                            <div class="form-group mb-4">
                                 <label for="arrival_date" class="form-label">Arrival Date <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control datepicker" id="arrival_date"
@@ -262,7 +220,7 @@
                 if (category || price || stock) {
                     $('.product-info').fadeIn();
                     $('#productCategory').text(category || 'N/A');
-                    $('#productPrice').text(price ? '$' + price : 'N/A');
+                    $('#productPrice').text((price && price !== '0.00') ? price + ' DH' : 'N/A');
                     $('#productStock').text(stock || '0');
                 } else {
                     $('.product-info').fadeOut();

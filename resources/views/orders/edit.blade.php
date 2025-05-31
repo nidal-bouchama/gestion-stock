@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" style="background-color: #2c3e50;"> <!-- Updated color -->
+    <nav class="navbar navbar-expand-lg"> <!-- Updated color -->
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="logo-text">
                 <span style="color: #e74c3c;">Gestion</span>
@@ -29,12 +29,8 @@
                 <span style="color: #27ae60;">Web</span>
             </div>
             <div>
-                <a href="{{ route('orders.index') }}" class="btn btn-outline-light me-2">
+                <a href="{{ route('orders.index') }}" class="btn btn-back">
                     <i class="fas fa-arrow-left me-1"></i> Back
-                </a>
-                <a href="#" class="btn btn-danger"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    <i class="fas fa-sign-out-alt me-1"></i> Logout
                 </a>
             </div>
         </div>
