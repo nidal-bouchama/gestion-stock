@@ -20,7 +20,7 @@
     <!-- Flatpickr CSS -->
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
     <link rel="icon" type="image" href="Images/logo.svg">
-    <link rel="stylesheet" href="{{asset('css/Stock_arrivals/Index.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/Stock_arrivals/Index.css') }}">
 </head>
 
 <body>
@@ -29,24 +29,32 @@
         <div class="spinner"></div>
     </div>
 
-    <!-- Your existing navbar -->
-    <nav class="navbar">
-        <div class="logo-text">
-            <span>Gestion</span>
-            <span>Stock</span>
-            <span>Web</span>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span>Gestion</span>
+                    <span>Stock</span>
+                    <span>Web</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+                    <li><a href="{{ route('products.index') }}"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="{{ route('suppliers.index') }}"><i class="fas fa-truck"></i> Suppliers</a></li>
+                    <li><a href="{{ route('customers.index') }}"><i class="fas fa-users"></i> Customers</a></li>
+                    <li><a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                    <li><a href="{{ route('stock-arrivals.index') }}" class="active"><i class="fas fa-dolly"></i> Stock
+                            Arrivals</a></li>
+                    <li>
+                        <a href="#" class="logout-btn"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt me-1"></i> Home</a>
-        <a href="{{ route('products.index') }}"><i class="fas fa-box me-1"></i> Products</a>
-        <a href="{{ route('suppliers.index') }}"><i class="fas fa-truck me-1"></i> Suppliers</a>
-        <a href="{{ route('customers.index') }}"><i class="fas fa-users me-1"></i> Customers</a>
-        <a href="{{ route('orders.index') }}"><i class="fas fa-shopping-cart me-1"></i> Orders</a>
-        <a href="{{ route('stock-arrivals.index') }}" class="active"><i class="fas fa-dolly me-1"></i> Stock
-            Arrivals</a>
-        <a href="#" class="logout-btn"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
-                class="fas fa-sign-out-alt me-1"></i> Logout</a>
-    </nav>
+    </header>
 
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf

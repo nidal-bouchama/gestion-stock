@@ -17,19 +17,19 @@
 
         body {
                 background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+        url('..Images/background-img.png') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .top-nav {
-            background: var(--primary-color);
+        }        .navbar {
+            background: #5d87b7;
             padding: 1rem;
-            color: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         }
 
         .logo-text {
@@ -52,132 +52,210 @@
         .main-content {
             flex: 1;
             padding: 2rem 0;
-        }
-
-        .card {
+        }        .card {
             border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            width: 100%;
         }
 
         .card-header {
-            background: linear-gradient(135deg, var(--primary-color), #34495e);
+            background: #5d87b7;
             color: white;
-            border-radius: 15px 15px 0 0 !important;
+            border-radius: 20px 20px 0 0 !important;
             padding: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 100%);
         }
 
         .form-label {
-            font-weight: 500;
+            font-weight: 600;
             color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }        .input-group {
+            width: 100%;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .input-group:focus-within {
+            transform: translateY(-2px);
         }
 
         .input-group-text {
-            background-color: #f8f9fa;
+            background-color: #5d87b7;
+            border: 1px solid #5d87b7;
+            color: white;
             border-right: none;
-        }
-
-        .form-control,
+            width: 45px;
+            justify-content: center;
+        }        .form-control,
         .form-select {
-            border-left: none;
-            padding: 0.6rem;
+            border: 1px solid #e1e8ef;
+            padding: 0.65rem;
+            height: 42px;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: all 0.2s;
+            width: 100%;
         }
 
         .form-control:focus,
         .form-select:focus {
-            box-shadow: none;
-            border-color: #ced4da;
+            box-shadow: 0 0 0 3px rgba(93, 135, 183, 0.15);
+            border-color: #5d87b7;
+        }
+
+        textarea.form-control {
+            height: auto;
+            width: 100%;
+            resize: vertical;
+            min-height: 100px;
         }
 
         .btn-primary {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, #5d87b7 0%, #4a6c93 100%);
             border: none;
-            padding: 0.6rem 1.5rem;
+            padding: 0.8rem 2rem;
             transition: all 0.3s;
+            width: 100%;
+            margin: 1rem 0;
+            display: block;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            font-size: 1rem;
+        }.btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
         }
 
         .btn-primary:hover {
-            background: #34495e;
+            background: linear-gradient(135deg, #e7557c 0%, #d64d72 100%) !important;
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(231, 85, 124, 0.3);
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .image-preview {
             max-width: 200px;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-top: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
 
-        footer {
-            background: var(--primary-color);
-            color: white;
+        .image-preview:hover {
+            transform: scale(1.02);
+        }
+
+        /* Custom styling for file input */
+        input[type="file"] {
+            position: relative;
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        /* Required field indicator */
+        .form-label span.required {
+            color: #e7557c;
+            margin-left: 4px;
+        }
+
+        /* Card body enhanced padding */
+        .card-body {
+            padding: 2rem !important;
+        }footer {
+            background: #000 !important;
+            color: #fff;
             text-align: center;
-            padding: 1rem;
-            margin-top: auto;
+            padding: 25px 0 15px 0;
+            font-size: 1rem;
+            margin-top: 40px;
+        }.nav-buttons {
+            display: flex;
+            gap: 1rem;
         }
 
         .btn-back {
-            background: #95a5a6;
-            color: white;
-            border: none;
+            color: #2c3e50;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-back:hover {
-            background: #7f8c8d;
-        }
-
-        .top-buttons {
-            display: flex;
-            gap: 1rem;
+            color: #e74c3c;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 
-<body>
-    <!-- Top Navigation -->
-    <nav class="top-nav d-flex justify-content-between align-items-center">
+<body>    <!-- Navigation -->
+    <nav class="navbar">
         <div class="logo-text">
             <span>Gestion</span>
             <span>Stock</span>
             <span>Web</span>
         </div>
-        <div class="top-buttons">
-            <a href="{{ route('products.index') }}" class="btn btn-back">
-                <i class="fas fa-arrow-left me-2"></i>Back
+        <div class="nav-buttons">
+            <a href="{{ route('products.index') }}" class="btn-back">
+                <i class="fas fa-arrow-left"></i>Back
             </a>
-            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                @csrf
-                <button type="submit" class="btn btn-danger">
-                    <i class="fas fa-sign-out-alt me-2"></i>Logout
-                </button>
-            </form>
         </div>
     </nav>
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
+        <div class="container">            <div class="row justify-content-center">
+                <div class="col-lg-6">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header text-center">
                             <h5 class="mb-0">
                                 <i class="fas fa-plus-circle me-2"></i>Add New Product
                             </h5>
                         </div>
-                        <div class="card-body p-4">
+                        <div class="card-body p-4 d-flex flex-column align-items-center">
                             <form id="productForm" action="{{ route('products.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
-                                <div class="mb-3">
-                                    <label class="form-label">Product Name *</label>
+                                <div class="mb-3">                                    <label class="form-label">Product Name <span class="required">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-tag"></i></span>
-                                        <input type="text" class="form-control" name="name" required>
+                                        <input type="text" class="form-control" name="name" required placeholder="Enter product name">
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label class="form-label">Category *</label>
+                                    <label class="form-label">Category <span class="required">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-folder"></i></span>
                                         <select class="form-select" name="category_id" required>
@@ -192,25 +270,21 @@
                                 <div class="mb-3">
                                     <label class="form-label">Description</label>
                                     <textarea class="form-control" name="description" rows="3"></textarea>
+                                </div>                                <div class="mb-3">
+                                    <label class="form-label">Price *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">DH</span>
+                                        <input type="number" step="0.01" class="form-control" name="price"
+                                            required>
+
+                                    </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Price *</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-                                            <input type="number" step="0.01" class="form-control" name="price"
-                                                required>
-                                            <span class="input-group-text">DH</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label class="form-label">Quantity *</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-boxes"></i></span>
-                                            <input type="number" class="form-control" name="quantity" required>
-                                        </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Quantity *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-boxes"></i></span>
+                                        <input type="number" class="form-control" name="quantity" required>
                                     </div>
                                 </div>
 
