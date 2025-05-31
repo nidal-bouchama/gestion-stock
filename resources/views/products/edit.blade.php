@@ -12,79 +12,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/Product/Edit.css') }}">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-        }
-
-        .navbar {
-            background: var(--primary-color);
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .logo-text span:first-child {
-            color: var(--accent-color);
-        }
-
-        .logo-text span:nth-child(2) {
-            color: white;
-        }
-
-        .logo-text span:last-child {
-            color: var(--success-color);
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-back {
-            background: #95a5a6;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn-back:hover {
-            background: #7f8c8d;
-            color: white;
-        }
-
-        .logout-btn {
-            background: var(--accent-color);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #c0392b;
-            color: white;
-        }
-
-        footer {
-            background-color: #000 !important;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: auto;
-        }
-    </style>
 </head>
 
 <body>
@@ -98,15 +25,8 @@
             <a href="{{ route('products.index') }}" class="btn-back">
                 <i class="fas fa-arrow-left me-2"></i>Back
             </a>
-            <a href="#" class="logout-btn"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt me-1"></i>Logout
-            </a>
         </div>
     </nav>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
 
     <div class="container mt-4">
         <div class="card product-edit-card shadow-sm">
@@ -155,7 +75,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="price" class="form-label">Price (DH)</label>
+                                    <label for="price" class="form-label">Price</label>
                                     <div class="input-group">
                                         <span class="input-group-text">DH</span>
                                         <input type="number" step="0.01" class="form-control" id="price"
