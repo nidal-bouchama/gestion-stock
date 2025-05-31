@@ -8,76 +8,7 @@
     <link rel="icon" type="image" href="{{ asset('Images/logo.svg') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Customers/Edit.css') }}">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-        }
-
-        .navbar {
-            background: var(--primary-color);
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .logo-text span:first-child {
-            color: var(--accent-color);
-        }
-
-        .logo-text span:nth-child(2) {
-            color: white;
-        }
-
-        .logo-text span:last-child {
-            color: var(--success-color);
-        }
-
-        .nav-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .btn-back {
-            background: #95a5a6;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn-back:hover {
-            background: #7f8c8d;
-            color: white;
-        }
-
-        .logout-btn {
-            background: #e74c3c;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            text-decoration: none;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logout-btn:hover {
-            background: #c0392b;
-            color: white;
-            box-shadow: 0 0 10px rgba(231, 76, 60, 0.8);
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/Customers/Edit.css') }}">    <!-- Styles moved to Edit.css -->
 </head>
 
 <body>
@@ -90,10 +21,6 @@
         <div class="nav-buttons">
             <a href="{{ route('customers.index') }}" class="btn-back">
                 <i class="fas fa-arrow-left me-2"></i>Back
-            </a>
-            <a href="#" class="logout-btn"
-                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fas fa-sign-out-alt me-1"></i> Logout
             </a>
         </div>
     </nav>

@@ -1,12 +1,13 @@
-
-:root {
+:root{
     --primary-color: #3498db;
-    --secondary-color: #2c3e50;
-    --success-color: #e74c3c;
+    --secondary-color: #5d87b7;
+    --text-color: #2c3e50;
+    --alert-success: #2ecc71;
+    --alert-danger: #e74c3c;
+    --warning-color: #f39c12;
     --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
+    --success-color: #28a745;
+    
 }
 
 * {
@@ -17,79 +18,101 @@
 }
 
 body {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('../../Images/background-img.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    color: #333;
+    color: #2c3e50;
 }
 
-.navbar {
-    background-color: var(--secondary-color);
-    padding: 12px 20px;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header {
+    background: #5d87b7;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.logo {
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+    margin-right: auto;
 }
 
-.logo-text {
+.logo span {
     font-weight: bold;
     font-size: 1.5rem;
+    margin-right: 1px;
+}
+
+.logo span:first-child {
+    color: #e74c3c;
+}
+
+.logo span:nth-child(2) {
+    color: whitesmoke;
+}
+
+.logo span:last-child {
+    color: #27ae60;
+}
+
+.nav-links {
+    list-style: none;
     display: flex;
-    align-items: center;
-    margin-right: 30px;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
 }
 
-.logo-text span:first-child {
-    color: rgb(193, 0, 0);
-}
-
-.logo-text span:nth-child(2) {
-    color: white;
-}
-
-.logo-text span:last-child {
-    color: #2ecc71;
-}
-
-.navbar a {
-    color: #ffffff;
+.nav-links a {
+    color: #2c3e50;
     text-decoration: none;
-    margin-right: 15px;
     font-weight: 500;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
+    transition: color 0.2s;
 }
 
-.navbar a:hover {
-    color: var(--warning-color);
-    background-color: rgba(255, 255, 255, 0.1);
+.nav-links a:hover {
+    color: #e74c3c;
 }
 
-.navbar a.active {
-    background-color: rgba(231, 76, 60, 0.2);
-    color: var(--success-color);
-    font-weight: 600;
+.nav-links a.active {
+    color: #e74c3c;
 }
 
 .logout-btn {
-    background-color: var(--danger-color);
-    color: white !important;
-    font-weight: bold;
-    padding: 8px 15px !important;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-    margin-left: auto;
+    background: none !important;
+    color: #2c3e50 !important;
+    padding: 0;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    color: #e74c3c !important;
 }
 
 .logout-btn:hover {
     background-color: #c82333;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
 }
 
 .main-content {
@@ -197,16 +220,16 @@ body {
 .table {
     width: 100%;
     margin-bottom: 1rem;
-    color: #212529;
+    color: rgb(255, 251, 251);
 }
 
 .table th {
-    background-color: #f8f9fa;
+    background-color:#5d87b7;
     font-weight: 600;
 }
 
 .table-hover tbody tr:hover {
-    background-color: rgba(0, 0, 0, 0.03);
+    background-color: rgb(255, 251, 251);
 }
 
 .action-buttons {
@@ -220,12 +243,13 @@ body {
 }
 
 footer {
-    background-color: var(--secondary-color);
-    color: white;
+    background: #222 !important;
+    color: #fff;
     text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
-    font-size: 0.85rem;
+    padding: 25px 0 15px 0;
+    font-size: 1rem;
+    margin-top: 40px;
+    position: relative;
 }
 
 /* Animation for form submission */

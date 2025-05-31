@@ -6,74 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Orders Management</title>
-    <!-- Favicon -->
     <link rel="icon" type="image" href="{{ asset('Images/logo.svg') }}">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- Select2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
-    <!-- Flatpickr CSS -->
     <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{asset('css/Orders/Index.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/Orders/Index.css') }}">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <div class="logo-text">
-                <span>Gestion</span>
-                <span>Stock</span>
-                <span>Web</span>
-            </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <i class="fas fa-bars text-white"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a href="{{ route('dashboard') }}" class="nav-link"><i class="fas fa-tachometer-alt me-1"></i>
-                            Home</a>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span>Gestion</span>
+                    <span>Stock</span>
+                    <span>Web</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ route('dashboard') }}"><i class="fas fa-tachometer-alt"></i> Home</a></li>
+                    <li><a href="{{ route('products.index') }}"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="{{ route('suppliers.index') }}"><i class="fas fa-truck"></i> Suppliers</a></li>
+                    <li><a href="{{ route('customers.index') }}"><i class="fas fa-users"></i> Customers</a></li>
+                    <li><a href="{{ route('orders.index') }}" class="active"><i class="fas fa-shopping-cart"></i>
+                            Orders</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('products.index') }}" class="nav-link"><i class="fas fa-box me-1"></i>
-                            Products</a>
+                    <li><a href="{{ route('stock-arrivals.index') }}"><i class="fas fa-dolly"></i> Stock Arrivals</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('suppliers.index') }}" class="nav-link"><i class="fas fa-truck me-1"></i>
-                            Suppliers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('customers.index') }}" class="nav-link"><i class="fas fa-users me-1"></i>
-                            Customers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('orders.index') }}" class="nav-link active"><i
-                                class="fas fa-shopping-cart me-1"></i> Orders</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('stock-arrivals.index') }}" class="nav-link"><i class="fas fa-dolly me-1"></i>
-                            Stock Arrivals</a>
-                    </li>
-                    <li class="nav-item ms-auto">
-                        <a href="#" class="nav-link logout-btn"
+                    <li>
+                        <a href="#" class="logout-btn"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="fas fa-sign-out-alt me-1"></i> Logout
+                            <i class="fas fa-sign-out-alt"></i> Logout
                         </a>
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
 
     <div class="main-content">
-        <div class="container">
+        <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="card orders-card">
@@ -96,7 +72,7 @@
                                                     <option value="{{ $customer->id }}"
                                                         data-phone="{{ $customer->phone ?? '' }}"
                                                         data-address="{{ $customer->address ?? '' }}">
-                                                        {{ $customer->name }}   
+                                                        {{ $customer->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
@@ -243,7 +219,7 @@
     </div>
 
     <footer>
-        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved.
+        &copy; {{ date('Y') }} Gestion Stock Web. All rights reserved. | Designed with nidal
     </footer>
 
     <!-- JavaScript Libraries -->
