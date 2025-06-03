@@ -8,6 +8,7 @@
     <link rel="icon" type="image" href="Images/logo.svg">
     <link rel="stylesheet" href="{{ asset('css/Accueil.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="{{ asset('js/Accueil.js') }}" defer></script>
 </head>
 
 <body>

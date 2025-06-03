@@ -161,6 +161,57 @@
             const loadingSpinner = document.getElementById('loadingSpinner');
             loadingSpinner.style.display = 'flex';
 
+            // Quick Actions functionality
+            const quickActionsBtn = document.getElementById('quickActionsBtn');
+            const quickActionsMenu = document.getElementById('quickActionsMenu');
+            
+            // Toggle menu on quick actions button click
+            quickActionsBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                quickActionsMenu.style.display = quickActionsMenu.style.display === 'none' ? 'block' : 'none';
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!quickActionsMenu.contains(e.target) && e.target !== quickActionsBtn) {
+                    quickActionsMenu.style.display = 'none';
+                }
+            });
+
+            // Export to Excel functionality
+            document.getElementById('exportExcelBtn').addEventListener('click', function() {
+                let table = $('#stockArrivalsTable').DataTable();
+                let data = table.data().toArray();
+                
+                // Create CSV content
+                let csvContent = "Supplier,Product,Quantity,Arrival Date\n";
+                data.forEach(function(row) {
+                    csvContent += row.join(',') + "\n";
+                });
+
+                // Create and trigger download
+                const blob = new Blob([csvContent], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.setAttribute('hidden', '');
+                a.setAttribute('href', url);
+                a.setAttribute('download', 'stock_arrivals.csv');
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+
+            // Print Table functionality
+            document.getElementById('printTableBtn').addEventListener('click', function() {
+                window.print();
+            });
+
+            // Refresh Data functionality
+            document.getElementById('refreshDataBtn').addEventListener('click', function() {
+                loadingSpinner.style.display = 'flex';
+                window.location.reload();
+            });
+
             // Initialize when window loads
             window.addEventListener('load', function() {
                 // Hide loading spinner
