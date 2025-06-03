@@ -1,60 +1,59 @@
-# Use an official PHP image with Apache
-FROM php:8.2-apache
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    zip \
-    unzip \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    --no-install-recommends && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) \
-        pdo_mysql \
-        mbstring \
-        exif \
-        pcntl \
-        bcmath \
-        gd \
-        curl \
-        openssl \
-        xml \
-        zip
-
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Use PHP 8.2 FPM Alpine as base image
+FROM php:8.2-fpm-alpine3.18
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Copy the application code
-COPY . /var/www/html
+# Install system dependencies
+RUN apk add --no-cache \
+    git \
+    curl \
+    libpng-dev \
+    oniguruma-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    postgresql-client \
+    postgresql-dev \
+    nodejs \
+    npm \
+    linux-headers
 
-# Install Composer dependencies
-RUN composer install --no-dev --optimize-autoloader
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd
 
-# Configure Apache
-# Enable rewrite module
-RUN a2enmod rewrite
-# Set the document root to the public directory
-RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
-# Allow .htaccess overrides
-RUN sed -i '/<Directory \/var\/www\/>/a\ \ \ \ AllowOverride All' /etc/apache2/apache2.conf
+# Node.js and npm are already installed from the previous step
 
-# Set permissions for storage and bootstrap/cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Get Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Expose port 80
-EXPOSE 80
+# Copy project files
+COPY . .
 
-# The default command runs Apache
-CMD ["apache2-foreground"]
+# Install project dependencies
+RUN composer install --no-dev --no-interaction --optimize-autoloader
+RUN npm install
+RUN npm run build
+
+# Generate application key if not exists
+RUN if [ ! -f ".env" ]; then \
+    cp .env.example .env && \
+    php artisan key:generate; \
+    fi
+
+# Set initial permissions
+RUN chown -R www-data:www-data . \
+    && chmod -R 755 . \
+    && chmod -R 775 storage bootstrap/cache
+
+# Create storage link
+RUN mkdir -p public/storage \
+    && php artisan storage:link \
+    && chown -R www-data:www-data public/storage \
+    && chmod -R 775 public/storage
+
+# Expose port 9000 for PHP-FPM
+EXPOSE 9000
+
+# Start PHP-FPM
+CMD ["php-fpm"]

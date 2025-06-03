@@ -22,6 +22,7 @@ header {
     background: #5d87b7;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     padding: 1rem 2rem;
+    height: 75px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -62,6 +63,10 @@ nav {
     list-style: none;
     display: flex;
     gap: 25px;
+    margin: 0;
+    /* Remove default ul margin */
+    padding: 0;
+    /* Remove default ul padding */
 }
 
 .nav-links a {

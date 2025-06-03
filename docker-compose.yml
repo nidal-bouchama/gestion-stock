@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gestion-stock-app
+    restart: unless-stopped
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_DATABASE=gestion-stock
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=nidalnidal
+    volumes:
+      - .:/var/www/html
+    networks:
+      - gestion-stock-network
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: gestion-stock-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - gestion-stock-network
+    depends_on:
+      - app
+
+  db:
+    image: postgres:15-alpine
+    container_name: gestion-stock-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=gestion-stock
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=nidalnidal
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - gestion-stock-network
+
+networks:
+  gestion-stock-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
